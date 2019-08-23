@@ -1,9 +1,46 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Quiz web application written using Ruby on Rails.
 
-Things you may want to cover:
+Things to add to the application:
+
+Models:
+
+1. Question - belongs to test
+
+  Params:
+
+    * body of the question
+
+    * answer
+
+2. Test - has many questions, has many attempts, belongs to user(?)
+
+  Params: TBA
+
+3. User - has many attempts, creates questions (admin)
+
+  Params:
+
+    * name
+
+    * password
+
+4. Attempt - belongs to user, belongs to test, an attempt to solve a test.
+
+  Params:
+
+    * correct answers
+
+    * incorrect answers
+
+    * unanswered
+
+    * time spent
+
+
+
+Things to be added to README:
 
 * Ruby version
 
