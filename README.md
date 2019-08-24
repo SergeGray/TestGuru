@@ -6,19 +6,26 @@ Things to add to the application:
 
 Models:
 
-1. Question - belongs to test
+1. Question - belongs to test, has many answers
 
   Params:
 
     * body of the question
 
-    * answer
+2. Answer - belongs to question
 
-2. Test - has many questions, has many attempts, belongs to user(?)
+  Params:
+
+    * body of the answer
+
+    * correct/incorrect
+
+
+3. Test - has many questions, has many attempts, belongs to user(?)
 
   Params: TBA
 
-3. User - has many attempts, creates questions (admin)
+4. User - has many attempts, creates questions (admin)
 
   Params:
 
@@ -26,7 +33,7 @@ Models:
 
     * password
 
-4. Attempt - belongs to user, belongs to test, an attempt to solve a test.
+5. Attempt - belongs to user, belongs to test, an attempt to solve a test.
 
   Params:
 
