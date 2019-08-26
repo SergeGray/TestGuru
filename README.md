@@ -23,7 +23,11 @@ Models:
 
 3. Test - has many questions, has many attempts, belongs to user(?)
 
-  Params: TBA
+  Params:
+
+    * title
+
+    * level
 
 4. User - has many attempts, creates questions (admin)
 
