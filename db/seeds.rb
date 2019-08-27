@@ -1,11 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
 categories = Category.create(
   [
     { title: 'Scripting' },
@@ -13,9 +5,9 @@ categories = Category.create(
     { title: 'Low level' }
   ]
 )
-User.create(
+users = User.create(
   [
-    { name: 'Vladimir' }, 
+    { name: 'Vladimir' },
     { name: 'Dmitry' },
     { name: 'Angrey' },
     { name: 'Egor' }
@@ -29,6 +21,18 @@ tests = Test.create(
     { title: 'Javascript', category_id: categories.second.id, level: 2 },
     { title: 'C', category_id: categories.third.id, level: 4 },
     { title: 'Assembly', category_id: categories.third.id, level: 5 }
+  ]
+)
+attempts = Attempt.create(
+  [
+    { user_id: users.first.id, test_id: tests.first.id, score: 16 },
+    { user_id: users.first.id, test_id: tests.third.id, score: 51, finished: true },
+    { user_id: users.second.id, test_id: tests.second.id, score: 32 },
+    { user_id: users.second.id, test_id: tests.fifth.id, score: 44, finished: true },
+    { user_id: users.third.id, test_id: tests.third.id, score: 29 },
+    { user_id: users.third.id, test_id: tests.last.id, score: 10 },
+    { user_id: users.fourth.id, test_id: tests.fourth.id, score: 17 },
+    { user_id: users.fourth.id, test_id: tests.first.id, score: 25, finished: true }
   ]
 )
 questions = Question.create(
@@ -57,4 +61,3 @@ Answer.create(
     { body: 'change', question_id: questions.last.id, correct: true }
   ]
 )
-
