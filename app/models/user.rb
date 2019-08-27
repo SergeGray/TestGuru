@@ -4,7 +4,7 @@ class User < ApplicationRecord
 
   def started_by_level(level)
     Test.where(
-      id: Attempt.where(user_id: id).pluck(:test_id)
-    ).where(level: level)
+      id: Attempt.where(user_id: id).pluck(:test_id), level: level
+    )
   end
 end

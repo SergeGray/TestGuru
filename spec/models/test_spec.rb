@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Test, type: :model do
-  let(:categories) do
+  let!(:categories) do
     Category.create!(
       [
         { title: "General", id: 1 },
@@ -9,7 +9,7 @@ RSpec.describe Test, type: :model do
       ]
     )
   end
-  let(:tests) do
+  let!(:tests) do
     Test.create!(
       [
         { id: 1, title: "Ruby", category_id: 1 },
@@ -21,8 +21,9 @@ RSpec.describe Test, type: :model do
 
   describe ".of_category" do
     it "returns all tests that belong to specified category" do
-      expect(Test.of_category(categories.first)).to contain_exactly(
-        tests.first, tests.second
+      tests
+      expect(Test.of_category(categories.first.title)).to eq(
+        [tests.second.title, tests.first.title]
       )
     end
   end
