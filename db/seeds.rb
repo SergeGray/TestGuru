@@ -1,11 +1,11 @@
-categories = Category.create(
+categories = Category.create!(
   [
     { title: 'Scripting' },
     { title: 'Web Development' },
     { title: 'Low level' }
   ]
 )
-users = User.create(
+users = User.create!(
   [
     { name: 'Vladimir' },
     { name: 'Dmitry' },
@@ -13,7 +13,7 @@ users = User.create(
     { name: 'Egor' }
   ]
 )
-tests = Test.create(
+tests = Test.create!(
   [
     { title: 'Python', category_id: categories.first.id },
     { title: 'Ruby', category_id: categories.first.id },
@@ -23,7 +23,7 @@ tests = Test.create(
     { title: 'Assembly', category_id: categories.third.id, level: 5 }
   ]
 )
-attempts = Attempt.create(
+attempts = Attempt.create!(
   [
     { user_id: users.first.id, test_id: tests.first.id, score: 16 },
     { user_id: users.first.id, test_id: tests.third.id, score: 51, finished: true },
@@ -35,7 +35,7 @@ attempts = Attempt.create(
     { user_id: users.fourth.id, test_id: tests.first.id, score: 25, finished: true }
   ]
 )
-questions = Question.create(
+questions = Question.create!(
   [
     { body: 'Python standard indentation length in spaces', test_id: tests.first.id },
     { body: 'What is the language named after?', test_id: tests.first.id },
@@ -45,7 +45,7 @@ questions = Question.create(
     { body: 'Which of the following is not a standard view file name?', test_id: tests.third.id }
   ]
 )
-Answer.create(
+Answer.create!(
   [
     { body: '2', question_id: questions.first.id },
     { body: '4', question_id: questions.first.id, correct: true },

@@ -4,7 +4,7 @@ RSpec.describe User, type: :model do
   let(:user) { User.create(name: "Sergey") }
   let(:category) { Category.create(title: "Web") }
   let(:tests) do
-    Test.create(
+    Test.create!(
       [
         { title: "HTML", category_id: category.id, level: 1 },
         { title: "Javascript", category_id: category.id, level: 2 },
@@ -15,7 +15,7 @@ RSpec.describe User, type: :model do
 
   describe "#started_by_level" do
     before(:each) do
-      Attempt.create(
+      Attempt.create!(
         [
           { user_id: user.id, test_id: tests.first.id },
           { user_id: user.id, test_id: tests.second.id },
