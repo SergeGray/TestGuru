@@ -15,12 +15,35 @@ users = User.create!(
 )
 tests = Test.create!(
   [
-    { title: 'Python', category_id: categories.first.id },
-    { title: 'Ruby', category_id: categories.first.id },
-    { title: 'Ruby on Rails', category_id: categories.second.id, level: 1 },
-    { title: 'Javascript', category_id: categories.second.id, level: 2 },
-    { title: 'C', category_id: categories.third.id, level: 4 },
-    { title: 'Assembly', category_id: categories.third.id, level: 5 }
+    {
+      title: 'Python',
+      category_id: categories.first.id,
+      author_id: users.first.id
+    }, {
+      title: 'Ruby',
+      category_id: categories.first.id,
+      author_id: users.first.id
+    }, {
+      title: 'Ruby on Rails',
+      category_id: categories.second.id,
+      level: 1,
+      author_id: users.second.id
+    }, {
+      title: 'Javascript',
+      category_id: categories.second.id,
+      level: 2,
+      author_id: users.second.id
+    }, {
+      title: 'C',
+      category_id: categories.third.id,
+      level: 4,
+      author_id: users.third.id
+    }, {
+      title: 'Assembly',
+      category_id: categories.third.id,
+      level: 5,
+      author_id: users.fourth.id
+    }
   ]
 )
 attempts = Attempt.create!(
