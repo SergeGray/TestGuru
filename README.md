@@ -2,8 +2,6 @@
 
 Quiz web application written using Ruby on Rails.
 
-Things to add to the application:
-
 Models:
 
 1. Question - belongs to test, has many answers
@@ -19,7 +17,6 @@ Models:
     * body of the answer
 
     * correct/incorrect
-
 
 3. Test - has many questions, has many attempts, belongs to user(?)
 
@@ -49,7 +46,11 @@ Models:
 
     * time spent
 
+Things to add:
 
+1. Controllers, views
+
+2. Pretty much everything else
 
 Things to be added to README:
 
