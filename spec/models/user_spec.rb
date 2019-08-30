@@ -6,9 +6,9 @@ RSpec.describe User, type: :model do
   let!(:tests) do
     Test.create!(
       [
-        { title: "HTML", category_id: category.id, level: 1 },
-        { title: "Javascript", category_id: category.id, level: 2 },
-        { title: "CSS", category_id: category.id, level: 1 }
+        { title: "HTML", category_id: category.id, level: 1, author_id: user.id },
+        { title: "Javascript", category_id: category.id, level: 2, author_id: user.id },
+        { title: "CSS", category_id: category.id, level: 1, author_id: user.id }
       ]
     )
   end

@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Test, type: :model do
+  let!(:user) { User.create(name: "Bob", id: 1) }
   let!(:categories) do
     Category.create!(
       [
@@ -12,9 +13,9 @@ RSpec.describe Test, type: :model do
   let!(:tests) do
     Test.create!(
       [
-        { id: 1, title: "Ruby", category_id: 1 },
-        { id: 2, title: "Lua", category_id: 1 },
-        { id: 3, title: "Javascript", category_id: 2 }
+        { id: 1, title: "Ruby", category_id: 1, author_id: 1 },
+        { id: 2, title: "Lua", category_id: 1, author_id: 1 },
+        { id: 3, title: "Javascript", category_id: 2, author_id: 1 }
       ]
     )
   end
