@@ -15,49 +15,72 @@ users = User.create!(
 )
 tests = Test.create!(
   [
-    { title: 'Python', category_id: categories.first.id },
-    { title: 'Ruby', category_id: categories.first.id },
-    { title: 'Ruby on Rails', category_id: categories.second.id, level: 1 },
-    { title: 'Javascript', category_id: categories.second.id, level: 2 },
-    { title: 'C', category_id: categories.third.id, level: 4 },
-    { title: 'Assembly', category_id: categories.third.id, level: 5 }
+    {
+      title: 'Python',
+      category: categories.first,
+      author: users.first
+    }, {
+      title: 'Ruby',
+      category: categories.first,
+      author: users.first
+    }, {
+      title: 'Ruby on Rails',
+      category: categories.second,
+      level: 1,
+      author: users.second
+    }, {
+      title: 'Javascript',
+      category: categories.second,
+      level: 2,
+      author: users.second
+    }, {
+      title: 'C',
+      category: categories.third,
+      level: 4,
+      author: users.third
+    }, {
+      title: 'Assembly',
+      category: categories.third,
+      level: 5,
+      author: users.fourth
+    }
   ]
 )
 attempts = Attempt.create!(
   [
-    { user_id: users.first.id, test_id: tests.first.id, score: 16 },
-    { user_id: users.first.id, test_id: tests.third.id, score: 51, finished: true },
-    { user_id: users.second.id, test_id: tests.second.id, score: 32 },
-    { user_id: users.second.id, test_id: tests.fifth.id, score: 44, finished: true },
-    { user_id: users.third.id, test_id: tests.third.id, score: 29 },
-    { user_id: users.third.id, test_id: tests.last.id, score: 10 },
-    { user_id: users.fourth.id, test_id: tests.fourth.id, score: 17 },
-    { user_id: users.fourth.id, test_id: tests.first.id, score: 25, finished: true }
+    { user: users.first, test: tests.first, score: 16 },
+    { user: users.first, test: tests.third, score: 51, finished: true },
+    { user: users.second, test: tests.second, score: 32 },
+    { user: users.second, test: tests.fifth, score: 44, finished: true },
+    { user: users.third, test: tests.third, score: 29 },
+    { user: users.third, test: tests.last, score: 10 },
+    { user: users.fourth, test: tests.fourth, score: 17 },
+    { user: users.fourth, test: tests.first, score: 25, finished: true }
   ]
 )
 questions = Question.create!(
   [
-    { body: 'Python standard indentation length in spaces', test_id: tests.first.id },
-    { body: 'What is the language named after?', test_id: tests.first.id },
-    { body: 'Ruby standard indentation length in spaces', test_id: tests.second.id },
-    { body: 'Which of the following is not an output method?', test_id: tests.second.id },
-    { body: 'Superclass of ApplicationController', test_id: tests.third.id },
-    { body: 'Which of the following is not a standard view file name?', test_id: tests.third.id }
+    { body: 'Python standard indentation length in spaces', test: tests.first },
+    { body: 'What is the language named after?', test: tests.first },
+    { body: 'Ruby standard indentation length in spaces', test: tests.second },
+    { body: 'Which of the following is not an output method?', test: tests.second },
+    { body: 'Superclass of ApplicationController', test: tests.third },
+    { body: 'Which of the following is not a standard view file name?', test: tests.third }
   ]
 )
 Answer.create!(
   [
-    { body: '2', question_id: questions.first.id },
-    { body: '4', question_id: questions.first.id, correct: true },
-    { body: 'Snake', question_id: questions.second.id, },
-    { body: 'British comedy group', question_id: questions.second.id, correct: true },
-    { body: '2', question_id: questions.third.id, correct: true },
-    { body: '4', question_id: questions.third.id },
-    { body: 'print', question_id: questions.fourth.id },
-    { body: 'output', question_id: questions.fourth.id, correct: true },
-    { body: 'ActionController::Base', question_id: questions.fifth.id, correct: true },
-    { body: 'ActiveController', question_id: questions.fifth.id },
-    { body: 'show', question_id: questions.last.id },
-    { body: 'change', question_id: questions.last.id, correct: true }
+    { body: '2', question: questions.first },
+    { body: '4', question: questions.first, correct: true },
+    { body: 'Snake', question: questions.second, },
+    { body: 'British comedy group', question: questions.second, correct: true },
+    { body: '2', question: questions.third, correct: true },
+    { body: '4', question: questions.third },
+    { body: 'print', question: questions.fourth },
+    { body: 'output', question: questions.fourth, correct: true },
+    { body: 'ActionController::Base', question: questions.fifth, correct: true },
+    { body: 'ActiveController', question: questions.fifth },
+    { body: 'show', question: questions.last },
+    { body: 'change', question: questions.last, correct: true }
   ]
 )
