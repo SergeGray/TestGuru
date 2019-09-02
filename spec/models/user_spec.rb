@@ -23,7 +23,6 @@ RSpec.describe User, type: :model do
   end
 
   describe "#started_by_level" do
-
     it "returns all started tests with specified level" do
       expect(user.started_by_level(1)).to contain_exactly(
         tests.first, tests.third
