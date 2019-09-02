@@ -28,7 +28,7 @@ class Test < ApplicationRecord
   private
 
   def validate_unique_title_level
-    return if self.class.where(title: title).pluck(:level).include?(level)
+    return unless self.class.where(title: title).pluck(:level).include?(level)
 
     errors.add(:base, "already exists with same name and level")
   end

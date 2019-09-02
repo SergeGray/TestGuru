@@ -68,6 +68,12 @@ RSpec.describe User, type: :model do
         new_user = User.new(invalid_attributes)
         expect(new_user.valid?).to be false
       end
+
+      it "disllows to create a user with an existing email" do
+        User.create!(valid_attributes)
+        new_user = User.new(valid_attributes)
+        expect(new_user.valid?).to be false
+      end
     end
   end
 
