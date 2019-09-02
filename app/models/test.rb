@@ -10,7 +10,7 @@ class Test < ApplicationRecord
     greater_than_or_equal_to: 0,
     only_integer: true
   }, allow_nil: true
-  validate :validate_unique_title_level
+  validates :title, uniqueness: { scope: :level }
 
   scope :of_level, ->(level) { where(level: level) }
   scope :easy, -> { of_level(0..1) }
@@ -24,12 +24,4 @@ class Test < ApplicationRecord
         .pluck(:title)
     end
   )
-
-  private
-
-  def validate_unique_title_level
-    return unless self.class.where(title: title).pluck(:level).include?(level)
-
-    errors.add(:base, "already exists with same name and level")
-  end
 end
