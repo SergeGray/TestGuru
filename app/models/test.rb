@@ -5,10 +5,16 @@ class Test < ApplicationRecord
   has_many :attempts, dependent: :destroy
   has_many :users, through: :attempts
 
-  def self.of_category(category_title)
+  validates :title, presence: true
+    
+  scope :of_level, -> (level) { where(level: level) }
+  scope :easy, -> { of_level(0..1) }
+  scope :medium, -> { of_level(2..4) }
+  scope :hard, -> { of_level(5..Float::INFINITY) }
+  scope :of_category, (lambda do |category_title|
     joins(:category)
       .where(categories: { title: category_title })
       .order(id: :desc)
       .pluck(:title)
-  end
+  end)
 end

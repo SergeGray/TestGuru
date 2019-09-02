@@ -1,23 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let!(:user) { User.create(name: "Sergey", id: 1) }
-  let!(:category) { Category.create(title: "Web", id: 1) }
+  let!(:user) { User.create(name: "Sergey", email: 'sergey@example.com') }
+  let!(:category) { Category.create(title: "Web") }
   let!(:tests) do
     Test.create!(
       [
-        { title: "HTML", category_id: 1, level: 1, author_id: 1, id: 1 },
-        { title: "Javascript", category_id: 1, level: 2, author_id: 1, id: 2 },
-        { title: "CSS", category_id: 1, level: 1, author_id: 1, id: 3 }
+        { title: "HTML", category: category, level: 1, author: user},
+        { title: "Javascript", category: category, level: 2, author: user },
+        { title: "CSS", category: category, level: 1, author: user }
       ]
     )
   end
   let!(:attempts) do
     Attempt.create!(
       [
-        { user_id: 1, test_id: 1 },
-        { user_id: 1, test_id: 2 },
-        { user_id: 1, test_id: 3 }
+        { user: user, test: tests.first },
+        { user: user, test: tests.second },
+        { user: user, test: tests.third }
       ]
     )
   end
