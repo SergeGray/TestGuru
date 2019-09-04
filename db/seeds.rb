@@ -7,10 +7,10 @@ categories = Category.create!(
 )
 users = User.create!(
   [
-    { name: 'Vladimir' },
-    { name: 'Dmitry' },
-    { name: 'Angrey' },
-    { name: 'Egor' }
+    { name: 'Vladimir', email: 'vladimir@gmail.com' },
+    { name: 'Dmitry', email: 'dmitry@yandex.ru' },
+    { name: 'Angrey', email: 'andrey@hotmail.com' },
+    { name: 'Egor', email: 'egor@mail.ru' }
   ]
 )
 tests = Test.create!(
@@ -46,7 +46,7 @@ tests = Test.create!(
     }
   ]
 )
-attempts = Attempt.create!(
+Attempt.create!(
   [
     { user: users.first, test: tests.first, score: 16 },
     { user: users.first, test: tests.third, score: 51, finished: true },
@@ -72,7 +72,7 @@ Answer.create!(
   [
     { body: '2', question: questions.first },
     { body: '4', question: questions.first, correct: true },
-    { body: 'Snake', question: questions.second, },
+    { body: 'Snake', question: questions.second },
     { body: 'British comedy group', question: questions.second, correct: true },
     { body: '2', question: questions.third, correct: true },
     { body: '4', question: questions.third },
