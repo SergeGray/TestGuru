@@ -148,7 +148,7 @@ RSpec.describe Test, type: :model do
 
   describe ".of_category" do
     it "returns an array of titles of tests that belong to given category" do
-      expect(Test.of_category(categories.first.title)).to eq(
+      expect(Test.titles_of_category(categories.first.title)).to eq(
         [tests.second.title, tests.first.title]
       )
     end
