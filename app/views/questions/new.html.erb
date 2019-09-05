@@ -1,4 +1,5 @@
-<%= form_with model: [@test, @question] do |form| %>
-  <%= form.text_field :body %>
-  <%= form.submit %>
-<% end %>
+<h1>New Question</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Back to Test', @test %>

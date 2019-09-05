@@ -9,18 +9,11 @@ RSpec.describe QuestionsController, type: :controller do
   let(:valid_attributes) do
     {
       body: "Who created Ruby language?",
-      test: test
+      test: test,
+      id: 1
     }
   end
-  let(:invalid_attributes) { { body: "", test: test } }
-
-  describe "GET #index" do
-    it "returns a success response" do
-      Question.create!(valid_attributes)
-      get :index, params: { test_id: test.id }
-      expect(response).to be_successful
-    end
-  end
+  let(:invalid_attributes) { { body: "", test: test, id: 2 } }
 
   describe "GET #show" do
     it "returns a success response" do
@@ -57,9 +50,9 @@ RSpec.describe QuestionsController, type: :controller do
         end.to change(Question, :count).by(1)
       end
 
-      it "redirects to Test questions" do
+      it "redirects to question" do
         post :create, params: { test_id: test.id, question: valid_attributes }
-        expect(response).to redirect_to(test_questions_path(test))
+        expect(response).to redirect_to(Question.last)
       end
     end
 
@@ -67,11 +60,6 @@ RSpec.describe QuestionsController, type: :controller do
       it "returns a success response" do
         post :create, params: { test_id: test.id, question: invalid_attributes }
         expect(response).to be_successful
-      end
-
-      it "renders a fail response" do
-        post :create, params: { test_id: test.id, question: invalid_attributes }
-        expect(response.body).to eq("failed to save question")
       end
     end
   end
@@ -82,12 +70,6 @@ RSpec.describe QuestionsController, type: :controller do
       expect do
         delete :destroy, params: { id: question.to_param }
       end.to change(Question, :count).by(-1)
-    end
-
-    it "renders a response" do
-      question = Question.create!(valid_attributes)
-      delete :destroy, params: { id: question.to_param }
-      expect(response.body).to eq("question destroyed")
     end
   end
 end
