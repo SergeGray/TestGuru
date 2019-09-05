@@ -32,7 +32,8 @@ RSpec.describe Answer, type: :model do
 
       it "disallows to create an answer with an invalid body" do
         answer = Answer.new(invalid_attributes)
-        expect(answer.valid?).to be false
+        answer.valid?
+        expect(answer.errors[:body]).to eq([BLANK_ERROR])
       end
     end
 
@@ -40,7 +41,8 @@ RSpec.describe Answer, type: :model do
       it "disallows to create more than 4 answers for the same question" do
         Answer.create!(valid_attributes)
         answer = Answer.new(body: "Skip", question: question)
-        expect(answer.valid?).to be false
+        answer.valid?
+        expect(answer.errors[:question]).to eq(["already has 4 answers"])
       end
     end
   end

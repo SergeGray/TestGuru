@@ -25,13 +25,15 @@ RSpec.describe Category, type: :model do
 
     it "disallows to create a category with an invalid title" do
       new_category = Category.new(invalid_attributes)
-      expect(new_category.valid?).to be false
+      new_category.valid?
+      expect(new_category.errors[:title]).to eq([BLANK_ERROR])
     end
 
     it "disallows to create a category with an existing title" do
       Category.create!(valid_attributes)
       new_category = Category.new(valid_attributes)
-      expect(new_category.valid?).to be false
+      new_category.valid?
+      expect(new_category.errors[:title]).to eq([TAKEN_ERROR])
     end
   end
 end

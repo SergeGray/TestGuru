@@ -1,0 +1,19 @@
+<h1>Questions</h1>
+<table>
+  <thead>
+    <tr>
+      <th>question:</th>
+      <th>link:</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @questions.each do |question| %>
+      <tr>
+        <td><%= question.body %></td>
+        <td><%= link_to 'show', question_path(question) %></tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'new question', new_test_question_path(@test) %>

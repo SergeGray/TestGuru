@@ -93,4 +93,6 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+  BLANK_ERROR = "can't be blank".freeze
+  TAKEN_ERROR = "has already been taken".freeze
 end

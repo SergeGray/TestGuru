@@ -69,7 +69,8 @@ RSpec.describe Test, type: :model do
 
       it "disallows to create a test with an invalid title" do
         new_test = Test.new(invalid_attributes)
-        expect(new_test.valid?).to be false
+        new_test.valid?
+        expect(new_test.errors[:title]).to eq([BLANK_ERROR])
       end
     end
 
@@ -91,12 +92,18 @@ RSpec.describe Test, type: :model do
 
       it "disallows to create a test with a negative level" do
         new_test = Test.new(level_lower_than_0)
-        expect(new_test.valid?).to be false
+        new_test.valid?
+        expect(new_test.errors[:level]).to eq(
+          [
+            "must be greater than or equal to 0"
+          ]
+        )
       end
 
       it "disallows to create a test with a float" do
         new_test = Test.new(float_level)
-        expect(new_test.valid?).to be false
+        new_test.valid?
+        expect(new_test.errors[:level]).to eq(["must be an integer"])
       end
     end
 
@@ -117,7 +124,8 @@ RSpec.describe Test, type: :model do
       it "disallows to create a test with same name and level" do
         Test.create!(valid_attributes)
         new_test = Test.new(valid_attributes)
-        expect(new_test.valid?).to be false
+        new_test.valid?
+        expect(new_test.errors[:title]).to eq([TAKEN_ERROR])
       end
     end
   end

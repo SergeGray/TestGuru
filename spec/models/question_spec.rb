@@ -33,7 +33,8 @@ RSpec.describe Question, type: :model do
 
       it "disallows to create a question with an invalid title" do
         question = Question.new(invalid_attributes)
-        expect(question.valid?).to be false
+        question.valid?
+        expect(question.errors[:body]).to eq([BLANK_ERROR])
       end
     end
   end
