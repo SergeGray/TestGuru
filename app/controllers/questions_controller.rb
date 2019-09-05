@@ -9,8 +9,7 @@ class QuestionsController < ApplicationController
     @questions = @test.questions
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @question = @test.questions.new
@@ -43,7 +42,7 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:test_id, :body)
+    params.require(:question).permit(:body)
   end
 
   def rescue_with_question_not_found
