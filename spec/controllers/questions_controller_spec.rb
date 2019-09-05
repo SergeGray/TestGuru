@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe QuestionsController, type: :controller do
-
   let(:category) { Category.create!(title: "General") }
   let(:author) { User.create!(name: "Serge", email: "s@example.com") }
   let(:test) do
@@ -30,16 +29,16 @@ RSpec.describe QuestionsController, type: :controller do
       expect(response).to be_successful
     end
 
-   context "with invalid question" do
-     it "returns a success response" do
-       get :show, params: { id: 1_000_000 }
-       expect(response).to be_successful
-     end
+    context "with invalid question" do
+      it "returns a success response" do
+        get :show, params: { id: 1_000_000 }
+        expect(response).to be_successful
+      end
 
-     it "renders a not found message" do
-       get :show, params: { id: 1_000_000 }
-       expect(response.body).to eq("question not found")
-     end
+      it "renders a not found message" do
+        get :show, params: { id: 1_000_000 }
+        expect(response.body).to eq("question not found")
+      end
     end
   end
 

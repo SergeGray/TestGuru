@@ -51,7 +51,8 @@ RSpec.describe User, type: :model do
 
       it "disllows to create a user with an invalid name" do
         new_user = User.new(invalid_attributes)
-        expect(new_user.valid?).to be false
+        new_user.valid?
+        expect(new_user.errors[:name]).to eq([BLANK_ERROR])
       end
     end
 
@@ -66,13 +67,15 @@ RSpec.describe User, type: :model do
 
       it "disllows to create a user with an invalid email" do
         new_user = User.new(invalid_attributes)
-        expect(new_user.valid?).to be false
+        new_user.valid?
+        expect(new_user.errors[:email]).to eq([BLANK_ERROR])
       end
 
       it "disllows to create a user with an existing email" do
         User.create!(valid_attributes)
         new_user = User.new(valid_attributes)
-        expect(new_user.valid?).to be false
+        new_user.valid?
+        expect(new_user.errors[:email]).to eq([TAKEN_ERROR])
       end
     end
   end
