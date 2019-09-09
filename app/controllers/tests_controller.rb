@@ -2,7 +2,7 @@ class TestsController < ApplicationController
   before_action :set_test, only: %i[show edit update destroy]
 
   def index
-    @test = Test.all
+    @tests = Test.all
   end
 
   def show; end
@@ -38,7 +38,7 @@ class TestsController < ApplicationController
     @test.destroy
 
     respond_to do |format|
-      format.html { redirect_to albums_url }
+      format.html { redirect_to tests_url }
     end
   end
 
@@ -49,6 +49,6 @@ class TestsController < ApplicationController
   end
 
   def test_params
-    params.require(:test).permit(:title, :level)
+    params.require(:test).permit(:title, :level, :category_id, :author_id)
   end
 end
