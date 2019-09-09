@@ -36,11 +36,10 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    test = @question.test
     @question.destroy
 
     respond_to do |format|
-      format.html { redirect_to test }
+      format.html { redirect_to @question.test }
     end
   end
 
