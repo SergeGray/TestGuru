@@ -1,13 +1,9 @@
 class QuestionsController < ApplicationController
-  before_action :set_question, only: %i[show destroy]
-  before_action :set_test, only: %i[index new create]
+  before_action :set_question, only: %i[show edit update destroy]
+  before_action :set_test, only: %i[new create]
 
   rescue_from ActiveRecord::RecordNotFound,
               with: :rescue_with_question_not_found
-
-  def index
-    @questions = @test.questions
-  end
 
   def show; end
 
@@ -15,20 +11,36 @@ class QuestionsController < ApplicationController
     @question = @test.questions.new
   end
 
+  def edit; end
+
   def create
     @question = @test.questions.new(question_params)
 
-    if @question.save
-      redirect_to test_questions_path(@test)
-    else
-      render plain: "failed to save question"
+    respond_to do |format|
+      if @question.save
+        format.html { redirect_to @question }
+      else
+        format.html { render :new }
+      end
+    end
+  end
+
+  def update
+    respond_to do |format|
+      if @question.update(question_params)
+        format.html { redirect_to @question }
+      else
+        format.html { render :edit }
+      end
     end
   end
 
   def destroy
     @question.destroy
 
-    render plain: "question destroyed"
+    respond_to do |format|
+      format.html { redirect_to @question.test }
+    end
   end
 
   private
