@@ -1,6 +1,7 @@
 <h1>Currently doing the <%= @attempt.test.title %> Test</h1>
 
 <strong>
+  <%= progress(@attempt) %> |
   <%= @attempt.current_question.body %>
 </strong>
 
