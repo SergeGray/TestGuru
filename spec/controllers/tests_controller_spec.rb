@@ -7,7 +7,7 @@ RSpec.describe TestsController, type: :controller do
     { title: "Ruby", category_id: 1, level: 0, author_id: 1 }
   end
   let(:invalid_attributes) do
-    { title: "Rust", category_id: 1, level: -1,author_id: 1 }
+    { title: "Rust", category_id: 1, level: -1, author_id: 1 }
   end
 
   describe "GET #index" do
@@ -44,9 +44,9 @@ RSpec.describe TestsController, type: :controller do
   describe "POST #create" do
     context "with valid params" do
       it "creates a new Album" do
-        expect {
+        expect do
           post :create, params: { test: valid_attributes }
-        }.to change(Test, :count).by(1)
+        end.to change(Test, :count).by(1)
       end
 
       it "redirects to the created test" do
@@ -65,9 +65,7 @@ RSpec.describe TestsController, type: :controller do
 
   describe "PUT #update" do
     context "with valid params" do
-      let(:new_attributes) {
-        { title: "Ruby on Rails", level: 1 }
-      }
+      let(:new_attributes) { { title: "Ruby on Rails", level: 1 } }
 
       it "updates the requested test" do
         test = Test.create! valid_attributes
@@ -78,7 +76,7 @@ RSpec.describe TestsController, type: :controller do
 
       it "redirects to the test" do
         test = Test.create! valid_attributes
-        put :update, params: {id: test.to_param, test: valid_attributes }
+        put :update, params: { id: test.to_param, test: valid_attributes }
         expect(response).to redirect_to(test)
       end
     end
@@ -95,9 +93,9 @@ RSpec.describe TestsController, type: :controller do
   describe "DELETE #destroy" do
     it "destroys the requested test" do
       test = Test.create! valid_attributes
-      expect {
+      expect do
         delete :destroy, params: { id: test.to_param }
-      }.to change(Test, :count).by(-1)
+      end.to change(Test, :count).by(-1)
     end
 
     it "redirects to the tests list" do
