@@ -1,0 +1,20 @@
+<h1>Currently doing the <%= @attempt.test.title %> Test</h1>
+
+<strong>
+  <%= @attempt.current_question.body %>
+</strong>
+
+<%= form_with url: attempt_path(@attempt),
+              local: true, 
+              method: :put do |form| %>
+  <%= form.collection_check_boxes :answer_ids,
+                                  @attempt.current_question.answers,
+                                  :id,
+                                  :body,
+                                  include_hidden: false do |box| %>
+    <%= box.check_box id: "answer_ids_#{box.object_id}" %>
+    <%= box.label %> 
+  <% end %>
+
+  <%= form.submit "Next" %>
+<% end %>
