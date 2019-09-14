@@ -104,4 +104,13 @@ RSpec.describe TestsController, type: :controller do
       expect(response).to redirect_to(tests_url)
     end
   end
+
+  describe "POST #start" do
+    it "starts the requested test" do
+      test = Test.create! valid_attributes
+      expect do
+        post :start, params: { id: test.to_param }
+      end.to change(Attempt, :count).by(1)
+    end
+  end
 end

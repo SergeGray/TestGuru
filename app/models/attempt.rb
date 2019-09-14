@@ -7,6 +7,7 @@ class Attempt < ApplicationRecord
   before_update :before_save_next_question
 
   def accept!(answer_ids)
+    answer_ids ||= []
     self.correct_questions += 1 if correct_answer?(answer_ids)
 
     save!
@@ -17,7 +18,7 @@ class Attempt < ApplicationRecord
   end
 
   def current_question_index
-    test.questions.order(:id).index(current_question) + 1
+    test.questions.order(:id).index(current_question)
   end
 
   def total_questions
@@ -25,7 +26,7 @@ class Attempt < ApplicationRecord
   end
 
   def score
-    (100.0 * correct_questions)/test.questions.count
+    (100.0 * correct_questions) / total_questions
   end
 
   private

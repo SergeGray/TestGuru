@@ -42,6 +42,14 @@ RSpec.describe QuestionsController, type: :controller do
     end
   end
 
+  describe "GET #edit" do
+    it "returns a success response" do
+      question = Question.create! valid_attributes
+      get :edit, params: { id: question.to_param }
+      expect(response).to be_successful
+    end
+  end
+
   describe "POST #create" do
     context "with valid params" do
       it "creates a new Question" do
@@ -59,6 +67,33 @@ RSpec.describe QuestionsController, type: :controller do
     context "with invalid params" do
       it "returns a success response" do
         post :create, params: { test_id: test.id, question: invalid_attributes }
+        expect(response).to be_successful
+      end
+    end
+  end
+
+  describe "PUT #update" do
+    context "with valid params" do
+      let(:new_attributes) { { body: "Most popular Ruby web framework" } }
+
+      it "updates the requested test" do
+        question = Question.create! valid_attributes
+        put :update, params: { id: question.to_param, question: new_attributes }
+        question.reload
+        expect(question.body).to eq(new_attributes[:body])
+      end
+
+      it "redirects to the test" do
+        question = Question.create! valid_attributes
+        put :update, params: { id: question.to_param, question: valid_attributes }
+        expect(response).to redirect_to(question)
+      end
+    end
+
+    context "with invalid params" do
+      it "returns a success response" do
+        question = Question.create! valid_attributes
+        put :update, params: { id: question.to_param, question: invalid_attributes }
         expect(response).to be_successful
       end
     end

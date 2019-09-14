@@ -14,6 +14,6 @@ module AttemptsHelper
   end
 
   def progress(attempt)
-    "#{attempt.current_question_index}/#{attempt.total_questions}"
+    "#{attempt.current_question_index + 1}/#{attempt.total_questions}"
   end
 end

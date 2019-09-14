@@ -57,7 +57,7 @@ class TestsController < ApplicationController
   end
 
   def set_user
-    #To be changed later
+    # To be changed later
     @user = User.first
   end
 
