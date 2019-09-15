@@ -13,7 +13,7 @@ RSpec.describe AttemptsHelper, type: :helper do
       it "returns result with green font and passing message" do
         attempt.accept!([answer.id])
         expect(helper.result(attempt)).to eq(
-          "<font color=#00FF00>100.0% - passed</font>"
+          "<div class=passed>100.0% - passed</div>"
         )
       end
     end
@@ -21,7 +21,7 @@ RSpec.describe AttemptsHelper, type: :helper do
     context "with failing score" do
       it "returns result with red font and failing message" do
         expect(helper.result(attempt)).to eq(
-          "<font color=#FF0000>0.0% - failed</font>"
+          "<div class=failed>0.0% - failed</div>"
         )
       end
     end

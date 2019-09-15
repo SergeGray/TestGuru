@@ -1,13 +1,13 @@
 class Attempt < ApplicationRecord
+  PASSING_SCORE = 85
+
   belongs_to :user
   belongs_to :test
   belongs_to :current_question, class_name: 'Question', optional: true
 
-  before_validation :before_validation_set_first_question, on: :create
-  before_update :before_save_next_question
+  before_validation :before_validation_set_current_question
 
   def accept!(answer_ids)
-    answer_ids ||= []
     self.correct_questions += 1 if correct_answer?(answer_ids)
 
     save!
@@ -18,7 +18,7 @@ class Attempt < ApplicationRecord
   end
 
   def current_question_index
-    test.questions.order(:id).index(current_question)
+    test.questions.index(current_question)
   end
 
   def total_questions
@@ -26,7 +26,11 @@ class Attempt < ApplicationRecord
   end
 
   def score
-    (100.0 * correct_questions) / total_questions
+    (100.0 * correct_questions / total_questions).round(2)
+  end
+
+  def successful?
+    score > 85
   end
 
   private
@@ -36,18 +40,15 @@ class Attempt < ApplicationRecord
   end
 
   def correct_answer?(answer_ids)
-    correct_answers.ids.sort == answer_ids.map(&:to_i).sort
+    correct_answers.ids.sort == Array(answer_ids).map(&:to_i).sort
   end
 
   def next_question
-    test.questions.order(:id).find_by('id > ?', current_question.id)
+    current_id = current_question ? current_question.id : 0
+    test.questions.order(:id).find_by('id > ?', current_id)
   end
 
-  def before_validation_set_first_question
-    self.current_question = test.questions.first if test.present?
-  end
-
-  def before_save_next_question
+  def before_validation_set_current_question
     self.current_question = next_question
   end
 end
