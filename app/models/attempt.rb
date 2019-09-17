@@ -44,8 +44,11 @@ class Attempt < ApplicationRecord
   end
 
   def next_question
-    current_id = current_question ? current_question.id : 0
-    test.questions.order(:id).find_by('id > ?', current_id)
+    if current_question
+      test.questions.where('id > ?', current_question.id).first
+    else
+      test.questions.first
+    end
   end
 
   def before_validation_set_current_question
