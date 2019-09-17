@@ -48,14 +48,14 @@ tests = Test.create!(
 )
 Attempt.create!(
   [
-    { user: users.first, test: tests.first, score: 16 },
-    { user: users.first, test: tests.third, score: 51, finished: true },
-    { user: users.second, test: tests.second, score: 32 },
-    { user: users.second, test: tests.fifth, score: 44, finished: true },
-    { user: users.third, test: tests.third, score: 29 },
-    { user: users.third, test: tests.last, score: 10 },
-    { user: users.fourth, test: tests.fourth, score: 17 },
-    { user: users.fourth, test: tests.first, score: 25, finished: true }
+    { user: users.first, test: tests.first },
+    { user: users.first, test: tests.third },
+    { user: users.second, test: tests.second },
+    { user: users.second, test: tests.fifth },
+    { user: users.third, test: tests.third },
+    { user: users.third, test: tests.last },
+    { user: users.fourth, test: tests.fourth },
+    { user: users.fourth, test: tests.first }
   ]
 )
 questions = Question.create!(

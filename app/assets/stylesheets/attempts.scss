@@ -1,0 +1,8 @@
+div {
+  &.passed {
+    color: #0f0;
+  }
+  &.failed {
+    color: #f00;
+  }
+}

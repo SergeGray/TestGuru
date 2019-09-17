@@ -11,4 +11,8 @@ class User < ApplicationRecord
   def started_by_level(level)
     tests.where(level: level)
   end
+
+  def attempt(test)
+    attempts.order(id: :desc).find_by(test_id: test.id)
+  end
 end

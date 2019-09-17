@@ -1,5 +1,5 @@
 module ApplicationHelper
-  GITHUB_LINK = "http://github.com".freeze
+  GITHUB_LINK = "https://github.com".freeze
 
   def current_year
     Time.zone.now.year

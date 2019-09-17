@@ -87,4 +87,10 @@ RSpec.describe User, type: :model do
       )
     end
   end
+
+  describe "#attempt" do
+    it "given a test returns a user attempt" do
+      expect(user.attempt(tests.first)).to eq(attempts.first)
+    end
+  end
 end

@@ -1,5 +1,6 @@
 class TestsController < ApplicationController
-  before_action :set_test, only: %i[show edit update destroy]
+  before_action :set_test, only: %i[show edit update destroy start]
+  before_action :set_user, only: :start
 
   def index
     @tests = Test.all
@@ -42,10 +43,22 @@ class TestsController < ApplicationController
     end
   end
 
+  def start
+    @user.tests.push(@test)
+    respond_to do |format|
+      format.html { redirect_to @user.attempt(@test) }
+    end
+  end
+
   private
 
   def set_test
     @test = Test.find(params[:id])
+  end
+
+  def set_user
+    # To be changed later
+    @user = User.first
   end
 
   def test_params

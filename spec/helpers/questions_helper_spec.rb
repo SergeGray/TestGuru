@@ -1,15 +1,27 @@
 require 'rails_helper'
 
-# Specs in this file have access to a helper object that includes
-# the QuestionsHelper. For example:
-#
-# describe QuestionsHelper do
-#   describe "string concat" do
-#     it "concats two strings with spaces" do
-#       expect(helper.concat_strings("this","that")).to eq("this that")
-#     end
-#   end
-# end
 RSpec.describe QuestionsHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:user) { User.create!(name: "Fred", email: "fred@yandex.ru") }
+  let(:category) { Category.create!(title: "Backend") }
+  let(:test) { Test.create!(category: category, author: user, title: "Ruby") }
+
+  describe "#question_header" do
+    context "on an existing question" do
+      it "outputs an editing header" do
+        question = Question.create!(test: test, body: "Superclass of Class")
+        expect(helper.question_header(question)).to eq(
+          "Edit #{test.title} question"
+        )
+      end
+    end
+
+    context "on a new question" do
+      it "outputs a creating header" do
+        question = Question.new(test: test, body: "Class of Class")
+        expect(helper.question_header(question)).to eq(
+          "Create new #{test.title} question"
+        )
+      end
+    end
+  end
 end
