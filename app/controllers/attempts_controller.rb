@@ -1,4 +1,5 @@
 class AttemptsController < ApplicationController
+  before_action :authenticate_user!, except: :result
   before_action :set_attempt, only: %i[show update result]
 
   def show; end

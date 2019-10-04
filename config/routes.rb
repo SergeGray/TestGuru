@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   get :registration, to: 'users#new'
   get :login, to: 'sessions#new'
+  delete :logout, to: 'sessions#destroy'
 
   resources :users, only: :create
   resources :sessions, only: :create
@@ -15,7 +16,7 @@ Rails.application.routes.draw do
     post :start, on: :member
   end
 
-  resources :attempts, only: %i[show update] do    
+  resources :attempts, only: %i[show update] do
     get :result, on: :member
   end
 end

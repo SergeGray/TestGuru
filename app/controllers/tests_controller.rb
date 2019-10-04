@@ -1,5 +1,5 @@
 class TestsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: %i[index show]
   before_action :set_test, only: %i[show edit update destroy start]
   before_action :set_user, only: :start
 
@@ -58,8 +58,7 @@ class TestsController < ApplicationController
   end
 
   def set_user
-    # To be changed later
-    @user = User.first
+    @user = User.find(session[:user_id])
   end
 
   def test_params
