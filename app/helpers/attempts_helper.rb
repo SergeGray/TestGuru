@@ -2,7 +2,7 @@ module AttemptsHelper
   PASSING_SCORE = 85
 
   def result(attempt)
-    pass, color = attempt.successful? ? "passed" : "failed"
+    pass = attempt.successful? ? "passed" : "failed"
     "<div class=#{pass}>#{attempt.score}% - #{pass}</div>".html_safe
   end
 

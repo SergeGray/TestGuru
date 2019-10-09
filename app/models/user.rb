@@ -5,8 +5,12 @@ class User < ApplicationRecord
                            foreign_key: "author_id",
                            dependent: :nullify
 
+  has_secure_password
+
   validates :name, presence: true
-  validates :email, presence: true, uniqueness: { case_sensitive: false }
+  validates :email, presence: true,
+                    uniqueness: { case_sensitive: false },
+                    format: { with: URI::MailTo::EMAIL_REGEXP }
 
   def started_by_level(level)
     tests.where(level: level)

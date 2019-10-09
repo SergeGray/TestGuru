@@ -1,7 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Test, type: :model do
-  let(:author) { User.create!(name: "Bob", email: 'bob@google.com') }
+  let(:author) do
+    User.create!(name: "Bob", email: 'bob@google.com', password: "123456")
+  end
   let(:categories) do
     Category.create!(
       [
