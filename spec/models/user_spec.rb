@@ -1,7 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let!(:user) { User.create(name: "Sergey", email: 'sergey@example.com') }
+  let!(:user) do
+    User.create(
+      name: "Sergey", email: 'sergey@example.com', password: "W1b6vV"
+    )
+  end
   let!(:category) { Category.create(title: "Web") }
   let!(:tests) do
     Test.create!(
@@ -41,8 +45,12 @@ RSpec.describe User, type: :model do
 
   describe "validates" do
     describe "name" do
-      let(:valid_attributes) { { name: "Bob", email: "bob@bob.bob" } }
-      let(:invalid_attributes) { { name: "", email: "invalid@fake.person" } }
+      let(:valid_attributes) do
+        { name: "Bob", email: "bob@bob.bob", password: "123456" }
+      end
+      let(:invalid_attributes) do
+        { name: "", email: "invalid@fake.person", password: "qwerty" }
+      end
 
       it "allows to create a user with a valid name" do
         new_user = User.new(valid_attributes)
@@ -57,8 +65,12 @@ RSpec.describe User, type: :model do
     end
 
     describe "email" do
-      let(:valid_attributes) { { name: "Bob", email: "bob@bob.bob" } }
-      let(:invalid_attributes) { { name: "Bill", email: "" } }
+      let(:valid_attributes) do
+        { name: "Bob", email: "bob@bob.bob", password: "123123" }
+      end
+      let(:invalid_attributes) do
+        { name: "Bill", email: "", password: "666aaa" }
+      end
 
       it "allows to create a user with a valid email" do
         new_user = User.new(valid_attributes)
@@ -68,7 +80,7 @@ RSpec.describe User, type: :model do
       it "disllows to create a user with an invalid email" do
         new_user = User.new(invalid_attributes)
         new_user.valid?
-        expect(new_user.errors[:email]).to eq([BLANK_ERROR])
+        expect(new_user.errors[:email]).to include(BLANK_ERROR)
       end
 
       it "disllows to create a user with an existing email" do

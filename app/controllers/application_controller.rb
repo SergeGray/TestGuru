@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   def authenticate_user!
     return if current_user
 
-    session[:path] = request.path
+    cookies[:path] = request.path
     redirect_to login_path, alert: "Are you a Guru? Login please."
   end
 

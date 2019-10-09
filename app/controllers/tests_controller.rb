@@ -1,7 +1,6 @@
 class TestsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
   before_action :set_test, only: %i[show edit update destroy start]
-  before_action :set_user, only: :start
 
   def index
     @tests = Test.all
@@ -45,9 +44,9 @@ class TestsController < ApplicationController
   end
 
   def start
-    @user.tests.push(@test)
+    current_user.tests.push(@test)
     respond_to do |format|
-      format.html { redirect_to @user.attempt(@test) }
+      format.html { redirect_to current_user.attempt(@test) }
     end
   end
 
@@ -55,10 +54,6 @@ class TestsController < ApplicationController
 
   def set_test
     @test = Test.find(params[:id])
-  end
-
-  def set_user
-    @user = User.find(session[:user_id])
   end
 
   def test_params

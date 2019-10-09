@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     respond_to do |format|
       if user&.authenticate(params[:password])
         session[:user_id] = user.id
-        format.html { redirect_to session[:path] || root_path }
+        format.html { redirect_to cookies.delete(:path) || root_path }
       else
         format.html { render :new }
         flash[:alert] = "Incorrect login data."

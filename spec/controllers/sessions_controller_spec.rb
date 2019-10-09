@@ -26,7 +26,7 @@ RSpec.describe SessionsController, type: :controller do
         let(:path) { new_test_path }
 
         it "redirects to path you were redirected from" do
-          session[:path] = path
+          cookies[:path] = path
           post :create, params: valid_attributes
           expect(response).to redirect_to(path)
         end
