@@ -15,6 +15,7 @@ class Admin::TestsController < Admin::BaseController
 
   def create
     @test = Test.new(test_params)
+    @test.author = current_user
     respond_to do |format|
       if @test.save
         format.html { redirect_to @test }
