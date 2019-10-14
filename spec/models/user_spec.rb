@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   let!(:user) do
     User.create(
-      name: "Sergey", email: 'sergey@example.com', password: "W1b6vV"
+      first_name: "Sergey", email: 'sergey@example.com', password: "W1b6vV"
     )
   end
   let!(:category) { Category.create(title: "Web") }
@@ -46,10 +46,10 @@ RSpec.describe User, type: :model do
   describe "validates" do
     describe "name" do
       let(:valid_attributes) do
-        { name: "Bob", email: "bob@bob.bob", password: "123456" }
+        { first_name: "Bob", email: "bob@bob.bob", password: "123456" }
       end
       let(:invalid_attributes) do
-        { name: "", email: "invalid@fake.person", password: "qwerty" }
+        { first_name: "", email: "invalid@fake.person", password: "qwerty" }
       end
 
       it "allows to create a user with a valid name" do
@@ -60,16 +60,16 @@ RSpec.describe User, type: :model do
       it "disllows to create a user with an invalid name" do
         new_user = User.new(invalid_attributes)
         new_user.valid?
-        expect(new_user.errors[:name]).to eq([BLANK_ERROR])
+        expect(new_user.errors[:first_name]).to eq([BLANK_ERROR])
       end
     end
 
     describe "email" do
       let(:valid_attributes) do
-        { name: "Bob", email: "bob@bob.bob", password: "123123" }
+        { first_name: "Bob", email: "bob@bob.bob", password: "123123" }
       end
       let(:invalid_attributes) do
-        { name: "Bill", email: "", password: "666aaa" }
+        { first_name: "Bill", email: "", password: "666aaa" }
       end
 
       it "allows to create a user with a valid email" do

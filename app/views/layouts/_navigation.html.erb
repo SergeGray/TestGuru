@@ -1,15 +1,15 @@
-<% if logged_in? %>
+<% if user_signed_in? %>
   <div class="nav user">
     Welcome, <b><%= current_user.email %></b> Guru
   </div>
   <div class="nav user">
-    <%= link_to "Logout", logout_path, method: :delete %>
+    <%= link_to "Logout", destroy_user_session_path, method: :delete %>
   </div>
 <% else %>
   <div class="nav user">
-    <%= link_to "Sign in", login_path %>
+    <%= link_to "Sign in", new_user_session_path %>
   </div>
   <div class="nav user">
-    <%= link_to "Register", registration_path %>
+    <%= link_to "Register", new_user_registration_path %>
   </div>
 <% end %>

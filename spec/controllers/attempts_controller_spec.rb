@@ -3,7 +3,9 @@ require 'rails_helper'
 RSpec.describe AttemptsController, type: :controller do
   let(:category) { Category.create!(title: "General") }
   let(:user) do
-    User.create!(name: "Serge", email: "s@example.com", password: "123123")
+    User.create!(
+      first_name: "Serge", email: "s@example.com", password: "123123"
+    )
   end
   let(:test) do
     Test.create!(title: "Ruby", category: category, author: user)

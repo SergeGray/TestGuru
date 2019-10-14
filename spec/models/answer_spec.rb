@@ -3,7 +3,9 @@ require 'rails_helper'
 RSpec.describe Answer, type: :model do
   let!(:category) { Category.create!(title: "General") }
   let!(:author) do
-    User.create!(name: "Serge", email: "serge@example.com", password: "123123")
+    User.create!(
+      first_name: "Serge", email: "serge@example.com", password: "123123"
+    )
   end
   let!(:test) { Test.create!(title: "Ruby", category: category, author: author) }
   let!(:question) do

@@ -6,7 +6,7 @@ RSpec.describe Category, type: :model do
   describe "dependent" do
     let(:author) do
       User.create!(
-        name: "Fred", email: "fred@fredcompany.org", password: "123456"
+        first_name: "Fred", email: "fred@fredcompany.org", password: "123456"
       )
     end
     let(:test) { Test.create!(title: "Ruby", category: category, author: author) }

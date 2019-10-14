@@ -4,7 +4,7 @@ RSpec.describe TestsController, type: :controller do
   let!(:category) { Category.create!(title: "Backend", id: 1) }
   let!(:author) do
     User.create!(
-      name: "Serge", email: "mail@mail.mail", password: "123123", id: 1
+      first_name: "Serge", email: "mail@mail.mail", password: "123123", id: 1
     )
   end
   let(:valid_attributes) do
