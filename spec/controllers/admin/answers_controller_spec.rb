@@ -1,10 +1,14 @@
 require 'rails_helper'
 
-RSpec.describe AnswersController, type: :controller do
+RSpec.describe Admin::AnswersController, type: :controller do
   let(:category) { Category.create!(title: "General") }
   let(:author) do
     User.create!(
-      first_name: "Serge", email: "s@example.com", password: "123123"
+      first_name: "Serge",
+      last_name: "Shayderov",
+      email: "s@example.com",
+      password: "123123",
+      type: "Admin"
     )
   end
   let(:test) do
@@ -16,20 +20,24 @@ RSpec.describe AnswersController, type: :controller do
   let(:valid_attributes) { { question: question, body: "Yes", correct: true } }
   let(:invalid_attributes) { { question: question, body: "", correct: false } }
 
-  describe "GET #show" do
-    it "returns a success response" do
-      answer = Answer.create! valid_attributes
-      get :show, params: { id: answer.to_param }
-      expect(response).to be_successful
+  context "when logged in as admin" do
+    before(:each) do
+      author.confirmed_at = Time.zone.now
+      author.save!
+      sign_in author
     end
-  end
 
-  context "when logged in" do
-    let(:logged_in) { { user_id: author.id } }
+    describe "GET #show" do
+      it "returns a success response" do
+        answer = Answer.create! valid_attributes
+        get :show, params: { id: answer.to_param }
+        expect(response).to be_successful
+      end
+    end
 
     describe "GET #new" do
       it "returns a success response" do
-        get :new, params: { question_id: question.id }, session: logged_in
+        get :new, params: { question_id: question.id }
         expect(response).to be_successful
       end
     end
@@ -37,7 +45,7 @@ RSpec.describe AnswersController, type: :controller do
     describe "GET #edit" do
       it "returns a success response" do
         answer = Answer.create! valid_attributes
-        get :edit, params: { id: answer.to_param }, session: logged_in
+        get :edit, params: { id: answer.to_param }
         expect(response).to be_successful
       end
     end
@@ -46,25 +54,25 @@ RSpec.describe AnswersController, type: :controller do
       context "with valid params" do
         it "creates a new Answer" do
           expect do
-            post :create,
-                 params: { question_id: question.id, answer: valid_attributes },
-                 session: logged_in
+            post :create, params: {
+              question_id: question.id, answer: valid_attributes
+            }
           end.to change(Answer, :count).by(1)
         end
 
         it "redirects to the created answer" do
-          post :create,
-               params: { question_id: question.id, answer: valid_attributes },
-               session: logged_in
-          expect(response).to redirect_to(Answer.last)
+          post :create, params: {
+            question_id: question.id, answer: valid_attributes
+          }
+          expect(response).to redirect_to(admin_answer_path(Answer.last))
         end
       end
 
       context "with invalid params" do
         it "returns a success response" do
-          post :create,
-               params: { question_id: question.id, answer: invalid_attributes },
-               session: logged_in
+          post :create, params: {
+            question_id: question.id, answer: invalid_attributes
+          }
           expect(response).to be_successful
         end
       end
@@ -76,28 +84,26 @@ RSpec.describe AnswersController, type: :controller do
 
         it "updates the requested answer" do
           answer = Answer.create! valid_attributes
-          put :update,
-              params: { id: answer.to_param, answer: new_attributes },
-              session: logged_in
+          put :update, params: { id: answer.to_param, answer: new_attributes }
           answer.reload
           expect(answer.body).to eq(new_attributes[:body])
         end
 
         it "redirects to the answer" do
           answer = Answer.create! valid_attributes
-          put :update,
-              params: { id: answer.to_param, answer: valid_attributes },
-              session: logged_in
-          expect(response).to redirect_to(answer)
+          put :update, params: {
+            id: answer.to_param, answer: valid_attributes
+          }
+          expect(response).to redirect_to(admin_answer_path(answer))
         end
       end
 
       context "with invalid params" do
         it "returns a success response" do
           answer = Answer.create! valid_attributes
-          put :update,
-              params: { id: answer.to_param, answer: invalid_attributes },
-              session: logged_in
+          put :update, params: {
+            id: answer.to_param, answer: invalid_attributes
+          }
           expect(response).to be_successful
         end
       end
@@ -107,14 +113,14 @@ RSpec.describe AnswersController, type: :controller do
       it "destroys the requested answer" do
         answer = Answer.create! valid_attributes
         expect do
-          delete :destroy, params: { id: answer.to_param }, session: logged_in
+          delete :destroy, params: { id: answer.to_param }
         end.to change(Answer, :count).by(-1)
       end
 
       it "redirects to the answers list" do
         answer = Answer.create! valid_attributes
-        delete :destroy, params: { id: answer.to_param }, session: logged_in
-        expect(response).to redirect_to(question_url(answer.question))
+        delete :destroy, params: { id: answer.to_param }
+        expect(response).to redirect_to(admin_question_path(answer.question))
       end
     end
   end
@@ -123,7 +129,7 @@ RSpec.describe AnswersController, type: :controller do
     describe "GET #new" do
       it "redirects to login page" do
         get :new, params: { question_id: question.id }
-        expect(response).to redirect_to(login_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
 
@@ -131,24 +137,26 @@ RSpec.describe AnswersController, type: :controller do
       it "redirects to login page" do
         answer = Answer.create! valid_attributes
         get :edit, params: { id: answer.to_param }
-        expect(response).to redirect_to(login_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
 
     describe "POST #create" do
       it "redirects to login page" do
-        post :create,
-             params: { question_id: question.id, answer: valid_attributes }
-        expect(response).to redirect_to(login_path)
+        post :create, params: { 
+          question_id: question.id, answer: valid_attributes
+        }
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
 
     describe "PUT #update" do
       it "redirects to login page" do
         answer = Answer.create! valid_attributes
-        put :update,
-            params: { id: answer.to_param, answer: valid_attributes }
-        expect(response).to redirect_to(login_path)
+        put :update, params: { 
+          id: answer.to_param, answer: valid_attributes
+        }
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
 
@@ -156,7 +164,7 @@ RSpec.describe AnswersController, type: :controller do
       it "redirects to login page" do
         answer = Answer.create! valid_attributes
         delete :destroy, params: { id: answer.to_param }
-        expect(response).to redirect_to(login_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
   end

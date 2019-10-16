@@ -1,4 +1,4 @@
-class AnswersController < ApplicationController
+class Admin::AnswersController < Admin::BaseController
   before_action :set_answer, only: %i[show edit update destroy]
   before_action :set_question, only: %i[new create]
 
@@ -15,7 +15,7 @@ class AnswersController < ApplicationController
 
     respond_to do |format|
       if @answer.save
-        format.html { redirect_to @answer }
+        format.html { redirect_to admin_answer_path(@answer) }
       else
         format.html { render :new }
       end
@@ -25,7 +25,7 @@ class AnswersController < ApplicationController
   def update
     respond_to do |format|
       if @answer.update(answer_params)
-        format.html { redirect_to @answer }
+        format.html { redirect_to admin_answer_path(@answer) }
       else
         format.html { render :edit }
       end
@@ -35,7 +35,7 @@ class AnswersController < ApplicationController
   def destroy
     @answer.destroy
     respond_to do |format|
-      format.html { redirect_to @answer.question }
+      format.html { redirect_to admin_question_path(@answer.question) }
     end
   end
 

@@ -2,11 +2,20 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   let!(:user) do
-    User.create(
+    User.create!(
       first_name: "Sergey", email: 'sergey@example.com', password: "W1b6vV"
     )
   end
-  let!(:category) { Category.create(title: "Web") }
+  let(:admin) do
+    User.create!(
+      first_name: "Mark",
+      last_name: "Zuckerberg",
+      email: "overlord@facebook.com",
+      password: "beepboop",
+      type: "Admin"
+    )
+  end
+  let!(:category) { Category.create!(title: "Web") }
   let!(:tests) do
     Test.create!(
       [
@@ -103,6 +112,16 @@ RSpec.describe User, type: :model do
   describe "#attempt" do
     it "given a test returns a user attempt" do
       expect(user.attempt(tests.first)).to eq(attempts.first)
+    end
+  end
+
+  describe "#admin?" do
+    it "returns true for admins" do
+      expect(admin.admin?).to be true
+    end
+
+    it "returns false for regular users" do
+      expect(user.admin?).to be false
     end
   end
 end

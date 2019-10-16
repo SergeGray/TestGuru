@@ -1,10 +1,14 @@
 require 'rails_helper'
 
-RSpec.describe QuestionsController, type: :controller do
+RSpec.describe Admin::QuestionsController, type: :controller do
   let(:category) { Category.create!(title: "General") }
   let(:author) do
     User.create!(
-      first_name: "Serge", email: "s@example.com", password: "123123"
+      first_name: "Serge",
+      last_name: "Shayderov",
+      email: "s@example.com",
+      password: "123123",
+      type: "Admin"
     )
   end
   let(:test) do
@@ -19,31 +23,36 @@ RSpec.describe QuestionsController, type: :controller do
   end
   let(:invalid_attributes) { { body: "", test: test, id: 2 } }
 
-  describe "GET #show" do
-    it "returns a success response" do
-      question = Question.create!(valid_attributes)
-      get :show, params: { id: question.to_param }
-      expect(response).to be_successful
+  context "when logged in as admin" do
+    before(:each) do
+      author.confirmed_at = Time.zone.now
+      author.save!
+      sign_in author
     end
 
-    context "with invalid question" do
+    describe "GET #show" do
       it "returns a success response" do
-        get :show, params: { id: 1_000_000 }
+        question = Question.create!(valid_attributes)
+        get :show, params: { id: question.to_param }
         expect(response).to be_successful
       end
 
-      it "renders a not found message" do
-        get :show, params: { id: 1_000_000 }
-        expect(response.body).to eq("question not found")
+      context "with invalid question" do
+        it "returns a success response" do
+          get :show, params: { id: 1_000_000 }
+          expect(response).to be_successful
+        end
+
+        it "renders a not found message" do
+          get :show, params: { id: 1_000_000 }
+          expect(response.body).to eq("question not found")
+        end
       end
     end
-  end
-  context "when logged in" do
-    let(:logged_in) { { user_id: author.id } }
 
     describe "GET #new" do
       it "returns a success response" do
-        get :new, params: { test_id: test.id }, session: logged_in
+        get :new, params: { test_id: test.id }
         expect(response).to be_successful
       end
     end
@@ -51,7 +60,7 @@ RSpec.describe QuestionsController, type: :controller do
     describe "GET #edit" do
       it "returns a success response" do
         question = Question.create! valid_attributes
-        get :edit, params: { id: question.to_param }, session: logged_in
+        get :edit, params: { id: question.to_param }
         expect(response).to be_successful
       end
     end
@@ -60,25 +69,25 @@ RSpec.describe QuestionsController, type: :controller do
       context "with valid params" do
         it "creates a new Question" do
           expect do
-            post :create,
-                 params: { test_id: test.id, question: valid_attributes },
-                 session: logged_in
+            post :create, params: {
+              test_id: test.id, question: valid_attributes
+            }
           end.to change(Question, :count).by(1)
         end
 
         it "redirects to question" do
-          post :create,
-               params: { test_id: test.id, question: valid_attributes },
-               session: logged_in
-          expect(response).to redirect_to(Question.last)
+          post :create, params: {
+            test_id: test.id, question: valid_attributes
+          }
+          expect(response).to redirect_to(admin_question_path(Question.last))
         end
       end
 
       context "with invalid params" do
         it "returns a success response" do
-          post :create,
-               params: { test_id: test.id, question: invalid_attributes },
-               session: logged_in
+          post :create, params: {
+            test_id: test.id, question: invalid_attributes
+          }
           expect(response).to be_successful
         end
       end
@@ -90,28 +99,28 @@ RSpec.describe QuestionsController, type: :controller do
 
         it "updates the requested test" do
           question = Question.create! valid_attributes
-          put :update,
-              params: { id: question.to_param, question: new_attributes },
-              session: logged_in
+          put :update, params: {
+            id: question.to_param, question: new_attributes
+          }
           question.reload
           expect(question.body).to eq(new_attributes[:body])
         end
 
         it "redirects to the test" do
           question = Question.create! valid_attributes
-          put :update,
-              params: { id: question.to_param, question: valid_attributes },
-              session: logged_in
-          expect(response).to redirect_to(question)
+          put :update, params: {
+            id: question.to_param, question: valid_attributes
+          }
+          expect(response).to redirect_to(admin_question_path(question))
         end
       end
 
       context "with invalid params" do
         it "returns a success response" do
           question = Question.create! valid_attributes
-          put :update,
-              params: { id: question.to_param, question: invalid_attributes },
-              session: logged_in
+          put :update, params: {
+            id: question.to_param, question: invalid_attributes
+          }
           expect(response).to be_successful
         end
       end
@@ -121,9 +130,7 @@ RSpec.describe QuestionsController, type: :controller do
       it "destroys the requested question" do
         question = Question.create!(valid_attributes)
         expect do
-          delete :destroy,
-                 params: { id: question.to_param },
-                 session: logged_in
+          delete :destroy, params: { id: question.to_param }
         end.to change(Question, :count).by(-1)
       end
     end
@@ -133,7 +140,7 @@ RSpec.describe QuestionsController, type: :controller do
     describe "GET #new" do
       it "redirects to login path" do
         get :new, params: { test_id: test.id }
-        expect(response).to redirect_to(login_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
 
@@ -141,24 +148,26 @@ RSpec.describe QuestionsController, type: :controller do
       it "redirects to login path" do
         question = Question.create! valid_attributes
         get :edit, params: { id: question.to_param }
-        expect(response).to redirect_to(login_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
 
     describe "POST #create" do
       it "redirects to login path" do
-        post :create,
-             params: { test_id: test.id, question: invalid_attributes }
-        expect(response).to redirect_to(login_path)
+        post :create, params: {
+          test_id: test.id, question: invalid_attributes
+        }
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
 
     describe "PUT #update" do
       it "redirects to login path" do
         question = Question.create! valid_attributes
-        put :update,
-            params: { id: question.to_param, question: valid_attributes }
-        expect(response).to redirect_to(login_path)
+        put :update, params: {
+          id: question.to_param, question: valid_attributes
+        }
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
 
@@ -166,7 +175,7 @@ RSpec.describe QuestionsController, type: :controller do
       it "redirects to login path" do
         question = Question.create!(valid_attributes)
         delete :destroy, params: { id: question.to_param }
-        expect(response).to redirect_to(login_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
   end

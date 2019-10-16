@@ -18,7 +18,7 @@ class Admin::TestsController < Admin::BaseController
     @test.author = current_user
     respond_to do |format|
       if @test.save
-        format.html { redirect_to @test }
+        format.html { redirect_to admin_test_path(@test) }
       else
         format.html { render :new }
       end
@@ -28,7 +28,7 @@ class Admin::TestsController < Admin::BaseController
   def update
     respond_to do |format|
       if @test.update(test_params)
-        format.html { redirect_to @test }
+        format.html { redirect_to admin_test_path(@test) }
       else
         format.html { render :edit }
       end
@@ -39,14 +39,7 @@ class Admin::TestsController < Admin::BaseController
     @test.destroy
 
     respond_to do |format|
-      format.html { redirect_to tests_url }
-    end
-  end
-
-  def start
-    current_user.tests.push(@test)
-    respond_to do |format|
-      format.html { redirect_to current_user.attempt(@test) }
+      format.html { redirect_to admin_tests_url }
     end
   end
 
