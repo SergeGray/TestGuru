@@ -3,7 +3,9 @@ require 'rails_helper'
 RSpec.describe AttemptsController, type: :controller do
   let(:category) { Category.create!(title: "General") }
   let(:user) do
-    User.create!(name: "Serge", email: "s@example.com", password: "123123")
+    User.create!(
+      first_name: "Serge", email: "s@example.com", password: "123123"
+    )
   end
   let(:test) do
     Test.create!(title: "Ruby", category: category, author: user)
@@ -22,12 +24,16 @@ RSpec.describe AttemptsController, type: :controller do
   end
 
   context "when logged in" do
-    let(:logged_in) { { user_id: user.id } }
+    before(:each) do
+      user.confirmed_at = Time.zone.now
+      user.save!
+      sign_in user
+    end
 
     describe "GET #show" do
       it "returns a success response" do
         attempt = Attempt.create!(attributes)
-        get :show, params: { id: attempt.to_param }, session: logged_in
+        get :show, params: { id: attempt.to_param }
         expect(response).to be_successful
       end
     end
@@ -37,9 +43,7 @@ RSpec.describe AttemptsController, type: :controller do
         it "renders #show again" do
           test.questions.create!(body: "What did it cost?")
           attempt = Attempt.create!(attributes)
-          get :update,
-              params: { id: attempt.to_param, answer_ids: [] },
-              session: logged_in
+          get :update, params: { id: attempt.to_param, answer_ids: [] }
           expect(response).to be_successful
         end
       end
@@ -47,9 +51,7 @@ RSpec.describe AttemptsController, type: :controller do
       context "When test is completed" do
         it "redirects to result" do
           attempt = Attempt.create!(attributes)
-          get :update,
-              params: { id: attempt.to_param, answer_ids: [] },
-              session: logged_in
+          get :update, params: { id: attempt.to_param, answer_ids: [] }
           expect(response).to redirect_to(result_attempt_url(attempt))
         end
       end
@@ -61,7 +63,7 @@ RSpec.describe AttemptsController, type: :controller do
       it "redirects to login path" do
         attempt = Attempt.create!(attributes)
         get :show, params: { id: attempt.to_param }
-        expect(response).to redirect_to(login_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
 
@@ -69,7 +71,7 @@ RSpec.describe AttemptsController, type: :controller do
       it "redirects to login path" do
         attempt = Attempt.create!(attributes)
         get :update, params: { id: attempt.to_param, answer_ids: [] }
-        expect(response).to redirect_to(login_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
   end

@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe Attempt, type: :model do
   let(:user) do
-    User.create!(name: "Bob", email: "bob@google.com", password: "qwerty")
+    User.create!(
+      first_name: "Bob", email: "bob@google.com", password: "qwerty"
+    )
   end
   let(:category) { Category.create!(title: "General") }
   let(:test) do

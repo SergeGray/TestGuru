@@ -7,10 +7,35 @@ categories = Category.create!(
 )
 users = User.create!(
   [
-    { name: 'Vladimir', email: 'vladimir@gmail.com' },
-    { name: 'Dmitry', email: 'dmitry@yandex.ru' },
-    { name: 'Angrey', email: 'andrey@hotmail.com' },
-    { name: 'Egor', email: 'egor@mail.ru' }
+    {
+      first_name: 'Serge',
+      last_name: 'Shayderov',
+      email: 's@shayderov.ru',
+      password: '123123',
+      type: 'Admin'
+    },
+    {
+      first_name: 'Vladimir',
+      last_name: 'Putin',
+      email: 'vladimir@gmail.com',
+      password: '123123',
+      type: 'Admin'
+    },
+    {
+      first_name: 'Dmitry',
+      email: 'dmitry@yandex.ru',
+      password: 'password'
+    },
+    {
+      first_name: 'Angrey',
+      email: 'andrey@hotmail.com',
+      password: 'qwerty'
+    },
+    {
+      first_name: 'Egor',
+      email: 'egor@mail.ru',
+      password: 'dQw4w9WgXcQ'
+    }
   ]
 )
 tests = Test.create!(
@@ -44,18 +69,6 @@ tests = Test.create!(
       level: 5,
       author: users.fourth
     }
-  ]
-)
-Attempt.create!(
-  [
-    { user: users.first, test: tests.first },
-    { user: users.first, test: tests.third },
-    { user: users.second, test: tests.second },
-    { user: users.second, test: tests.fifth },
-    { user: users.third, test: tests.third },
-    { user: users.third, test: tests.last },
-    { user: users.fourth, test: tests.fourth },
-    { user: users.fourth, test: tests.first }
   ]
 )
 questions = Question.create!(

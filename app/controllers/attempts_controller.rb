@@ -11,7 +11,10 @@ class AttemptsController < ApplicationController
 
     respond_to do |format|
       if @attempt.completed?
-        format.html { redirect_to result_attempt_path(@attempt) }
+        format.html do
+          TestsMailer.completed_test(@attempt).deliver_now
+          redirect_to result_attempt_path(@attempt)
+        end
       else
         format.html { render :show }
       end

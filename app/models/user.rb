@@ -5,12 +5,15 @@ class User < ApplicationRecord
                            foreign_key: "author_id",
                            dependent: :nullify
 
-  has_secure_password
+  validates :first_name, presence: true
 
-  validates :name, presence: true
-  validates :email, presence: true,
-                    uniqueness: { case_sensitive: false },
-                    format: { with: URI::MailTo::EMAIL_REGEXP }
+  devise :database_authenticatable,
+         :registerable,
+         :recoverable,
+         :rememberable,
+         :trackable,
+         :validatable,
+         :confirmable
 
   def started_by_level(level)
     tests.where(level: level)
@@ -18,5 +21,9 @@ class User < ApplicationRecord
 
   def attempt(test)
     attempts.order(id: :desc).find_by(test_id: test.id)
+  end
+
+  def admin?
+    is_a?(Admin)
   end
 end

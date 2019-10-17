@@ -2,7 +2,9 @@ require 'rails_helper'
 
 RSpec.describe QuestionsHelper, type: :helper do
   let(:user) do
-    User.create!(name: "Fred", email: "fred@yandex.ru", password: "fred4334")
+    User.create!(
+      first_name: "Fred", email: "fred@yandex.ru", password: "fred4334"
+    )
   end
   let(:category) { Category.create!(title: "Backend") }
   let(:test) { Test.create!(category: category, author: user, title: "Ruby") }

@@ -4,7 +4,7 @@ RSpec.describe TestsController, type: :controller do
   let!(:category) { Category.create!(title: "Backend", id: 1) }
   let!(:author) do
     User.create!(
-      name: "Serge", email: "mail@mail.mail", password: "123123", id: 1
+      first_name: "Serge", email: "mail@mail.mail", password: "123123", id: 1
     )
   end
   let(:valid_attributes) do
@@ -22,157 +22,27 @@ RSpec.describe TestsController, type: :controller do
     end
   end
 
-  describe "GET #show" do
-    it "returns a success response" do
-      test = Test.create! valid_attributes
-      get :show, params: { id: test.to_param }
-      expect(response).to be_successful
-    end
-  end
-  context "when logged in" do
-    let(:logged_in) { { user_id: author.id } }
-
-    describe "GET #new" do
-      it "returns a success response" do
-        get :new, session: logged_in
-        expect(response).to be_successful
-      end
-    end
-
-    describe "GET #edit" do
-      it "returns a success response" do
-        test = Test.create! valid_attributes
-        get :edit, params: { id: test.to_param }, session: logged_in
-        expect(response).to be_successful
-      end
-    end
-
-    describe "POST #create" do
-      context "with valid params" do
-        it "creates a new Album" do
-          expect do
-            post :create,
-                 params: { test: valid_attributes },
-                 session: logged_in
-          end.to change(Test, :count).by(1)
-        end
-
-        it "redirects to the created test" do
-          post :create, params: { test: valid_attributes }, session: logged_in
-          expect(response).to redirect_to(Test.last)
-        end
+  describe "POST #start" do
+    context "when logged in" do
+      before(:each) do
+        author.confirmed_at = Time.zone.now
+        author.save!
+        sign_in author
       end
 
-      context "with invalid params" do
-        it "returns a success response" do
-          post :create, params: { test: invalid_attributes }, session: logged_in
-          expect(response).to be_successful
-        end
-      end
-    end
-
-    describe "PUT #update" do
-      context "with valid params" do
-        let(:new_attributes) { { title: "Ruby on Rails", level: 1 } }
-
-        it "updates the requested test" do
-          test = Test.create! valid_attributes
-          put :update,
-              params: { id: test.to_param, test: new_attributes },
-              session: logged_in
-          test.reload
-          expect(test.title).to eq(new_attributes[:title])
-        end
-
-        it "redirects to the test" do
-          test = Test.create! valid_attributes
-          put :update,
-              params: { id: test.to_param, test: valid_attributes },
-              session: logged_in
-          expect(response).to redirect_to(test)
-        end
-      end
-
-      context "with invalid params" do
-        it "returns a success response" do
-          test = Test.create! valid_attributes
-          put :update,
-              params: { id: test.to_param, test: invalid_attributes },
-              session: logged_in
-          expect(response).to be_successful
-        end
-      end
-    end
-
-    describe "DELETE #destroy" do
-      it "destroys the requested test" do
-        test = Test.create! valid_attributes
-        expect do
-          delete :destroy, params: { id: test.to_param }, session: logged_in
-        end.to change(Test, :count).by(-1)
-      end
-
-      it "redirects to the tests list" do
-        test = Test.create! valid_attributes
-        delete :destroy, params: { id: test.to_param }, session: logged_in
-        expect(response).to redirect_to(tests_url)
-      end
-    end
-
-    describe "POST #start" do
       it "starts the requested test" do
         test = Test.create! valid_attributes
         expect do
-          post :start, params: { id: test.to_param }, session: logged_in
+          post :start, params: { id: test.to_param }
         end.to change(Attempt, :count).by(1)
       end
     end
-  end
 
-  context "when not logged in" do
-    describe "GET #new" do
-      it "redirects to login path" do
-        get :new
-        expect(response).to redirect_to(login_path)
-      end
-    end
-
-    describe "GET #edit" do
-      it "redirects to login path" do
-        test = Test.create! valid_attributes
-        get :edit, params: { id: test.to_param }
-        expect(response).to redirect_to(login_path)
-      end
-    end
-
-    describe "POST #create" do
-      it "redirects to login path" do
-        post :create, params: { test: valid_attributes }
-        expect(response).to redirect_to(login_path)
-      end
-    end
-
-    describe "PUT #update" do
-      it "redirects to login path" do
-        test = Test.create! valid_attributes
-        put :update, params: { id: test.to_param, test: valid_attributes }
-        expect(response).to redirect_to(login_path)
-      end
-    end
-
-    describe "DELETE #destroy" do
-      it "redirects to login path" do
-        test = Test.create! valid_attributes
-        delete :destroy, params: { id: test.to_param }
-        expect(response).to redirect_to(login_path)
-      end
-    end
-
-    describe "POST #start" do
+    context "when not logged in" do
       it "redirects to login path" do
         test = Test.create! valid_attributes
         post :start, params: { id: test.to_param }
-        expect(response).to redirect_to(login_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
   end

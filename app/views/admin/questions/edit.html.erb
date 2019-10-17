@@ -1,0 +1,6 @@
+<h1><%= question_header(@question) %></h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', admin_question_path(@question) %> |
+<%= link_to 'Back to Test', admin_test_path(@question.test) %>
