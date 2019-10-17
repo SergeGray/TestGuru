@@ -143,7 +143,7 @@ RSpec.describe Admin::AnswersController, type: :controller do
 
     describe "POST #create" do
       it "redirects to login page" do
-        post :create, params: { 
+        post :create, params: {
           question_id: question.id, answer: valid_attributes
         }
         expect(response).to redirect_to(new_user_session_path)
@@ -153,7 +153,7 @@ RSpec.describe Admin::AnswersController, type: :controller do
     describe "PUT #update" do
       it "redirects to login page" do
         answer = Answer.create! valid_attributes
-        put :update, params: { 
+        put :update, params: {
           id: answer.to_param, answer: valid_attributes
         }
         expect(response).to redirect_to(new_user_session_path)

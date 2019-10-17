@@ -14,24 +14,24 @@ users = User.create!(
       password: '123123',
       type: 'Admin'
     },
-    { 
+    {
       first_name: 'Vladimir',
       last_name: 'Putin',
       email: 'vladimir@gmail.com',
       password: '123123',
       type: 'Admin'
     },
-    { 
+    {
       first_name: 'Dmitry',
       email: 'dmitry@yandex.ru',
       password: 'password'
     },
-    { 
+    {
       first_name: 'Angrey',
       email: 'andrey@hotmail.com',
       password: 'qwerty'
     },
-    { 
+    {
       first_name: 'Egor',
       email: 'egor@mail.ru',
       password: 'dQw4w9WgXcQ'

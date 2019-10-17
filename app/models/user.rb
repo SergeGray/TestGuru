@@ -1,12 +1,4 @@
 class User < ApplicationRecord
-  devise :database_authenticatable,
-         :registerable,
-         :recoverable,
-         :rememberable,
-         :trackable,
-         :validatable,
-         :confirmable
-
   has_many :attempts, dependent: :destroy
   has_many :tests, through: :attempts
   has_many :created_tests, class_name: "Test",
@@ -14,9 +6,14 @@ class User < ApplicationRecord
                            dependent: :nullify
 
   validates :first_name, presence: true
-  validates :email, presence: true,
-                    uniqueness: { case_sensitive: false },
-                    format: { with: URI::MailTo::EMAIL_REGEXP }
+
+  devise :database_authenticatable,
+         :registerable,
+         :recoverable,
+         :rememberable,
+         :trackable,
+         :validatable,
+         :confirmable
 
   def started_by_level(level)
     tests.where(level: level)

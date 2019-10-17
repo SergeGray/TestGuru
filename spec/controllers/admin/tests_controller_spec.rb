@@ -100,7 +100,7 @@ RSpec.describe Admin::TestsController, type: :controller do
       context "with invalid params" do
         it "returns a success response" do
           test = Test.create! valid_attributes
-          put :update, params: { id: test.to_param, test: invalid_attributes }       
+          put :update, params: { id: test.to_param, test: invalid_attributes }
           expect(response).to be_successful
         end
       end

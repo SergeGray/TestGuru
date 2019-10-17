@@ -25,9 +25,9 @@ RSpec.describe AttemptsController, type: :controller do
 
   context "when logged in" do
     before(:each) do
-        user.confirmed_at = Time.zone.now
-        user.save!
-        sign_in user
+      user.confirmed_at = Time.zone.now
+      user.save!
+      sign_in user
     end
 
     describe "GET #show" do

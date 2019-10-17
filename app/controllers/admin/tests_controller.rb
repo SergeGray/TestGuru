@@ -14,8 +14,7 @@ class Admin::TestsController < Admin::BaseController
   def edit; end
 
   def create
-    @test = Test.new(test_params)
-    @test.author = current_user
+    @test = current_user.created_tests.new(test_params)
     respond_to do |format|
       if @test.save
         format.html { redirect_to admin_test_path(@test) }
