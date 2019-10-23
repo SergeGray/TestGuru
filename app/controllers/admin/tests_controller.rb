@@ -17,7 +17,9 @@ class Admin::TestsController < Admin::BaseController
     @test = current_user.created_tests.new(test_params)
     respond_to do |format|
       if @test.save
-        format.html { redirect_to admin_test_path(@test) }
+        format.html do
+          redirect_to admin_test_path(@test), notice: t('.success')
+        end
       else
         format.html { render :new }
       end

@@ -1,25 +1,25 @@
 <p>
-  <strong>Title:</strong>
+<strong><%= t('.title') %>:</strong>
   <%= @test.title %>
 </p>
 
 <p>
-  <strong>Category:</strong>
+  <strong><%= t('.category') %>:</strong>
   <%= @test.category.title %>
 </p>
 <p>
-  <strong>Level:</strong>
+  <strong><%= t('.level') %>:</strong>
   <%= @test.level %>
 </p>
 <p>
-  <strong>Author:</strong>
+  <strong><%= t('.author') %>:</strong>
   <%= @test.author.first_name %> <%= @test.author&.last_name %>
 </p>
 
-<h2>Questions</h2>
+<h2><%= t('.questions') %></h2>
   <table>
     <tbody>
       <%= render @test.questions %>
     </tbody>
   </table>
-<%= link_to 'Back', admin_tests_path %>
+<%= link_to t('.back'), admin_tests_path %>
