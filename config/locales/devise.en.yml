@@ -1,8 +1,8 @@
-# Additional translations at https://github.com/plataformatec/devise/wiki/I18n
-
 en:
   devise:
     confirmations:
+      new:
+        resend: "Resend confirmation instructions"
       confirmed: "Your email address has been successfully confirmed."
       send_instructions: "You will receive an email with instructions for how to confirm your email address in a few minutes."
       send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions for how to confirm your email address in a few minutes."
@@ -19,24 +19,62 @@ en:
     mailer:
       confirmation_instructions:
         subject: "Confirmation instructions"
+        welcome: "Welcome, %{email}!"
+        body: "You can confirm your account email through the link below:"
+        comfirm: "Confirm my account"
       reset_password_instructions:
         subject: "Reset password instructions"
+        hello: &hello "Hello, %{email}!"
+        body: "Someone has requested a link to change your password. You can do this through the link below."
+        link: "Change my password"
+        ignore: "If you didn't request this, please ignore this email."
+        change: "Your password won't change until you access the link above and create a new one."
       unlock_instructions:
         subject: "Unlock instructions"
+        hello: *hello
+        body: "Your account has been locked due to an excessive number of unsuccessful sign in attempts."
+        instructions: "Click the link below to unlock your account:"
+        unlock: "Unlock my account"
       email_changed:
         subject: "Email Changed"
+        hello: *hello
+        unconfirmed: "We're contacting you to notify you that your email is being changed to %{email}."
+        confirmed: "We're contacting you to notify you that your email has been changed to %{email}."
       password_change:
         subject: "Password Changed"
+        hello: *hello
+        body: "We're contacting you to notify you that your password has been changed."
     omniauth_callbacks:
       failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
       success: "Successfully authenticated from %{kind} account."
     passwords:
+      new:
+        header: "Forgot your password?"
+        submit: "Send me reset password instructions"
+      edit:
+        header: "Edit your password"
+        minimum: &minimum "%{number} characters minimum"
+        confirm: "Confirm new password"
+        submit: "Change my password"
       no_token: "You can't access this page without coming from a password reset email. If you do come from a password reset email, please make sure you used the full URL provided."
       send_instructions: "You will receive an email with instructions on how to reset your password in a few minutes."
       send_paranoid_instructions: "If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes."
       updated: "Your password has been changed successfully. You are now signed in."
       updated_not_active: "Your password has been changed successfully."
     registrations:
+      edit:
+        header: "Edit %{user}"
+        blank: "(leave blank if you don't want to change it)"
+        minimum: *minimum
+        require: "(we need your current password to confirm your changes)"
+        cancel: "Cancel my account"
+        unhappy: "Unhappy?"
+        confirm: "Are you sure?"
+        back: "Back"
+      new:
+        header: "Become a Guru"
+        minimum: *minimum
+        sign_up: "Sign Up"
       destroyed: "Bye! Your account has been successfully cancelled. We hope to see you again soon."
       signed_up: "Welcome! You have signed up successfully."
       signed_up_but_inactive: "You have signed up successfully. However, we could not sign you in because your account is not yet activated."
@@ -46,6 +84,9 @@ en:
       updated: "Your account has been updated successfully."
       updated_but_not_signed_in: "Your account has been updated successfully, but since your password was changed, you need to sign in again"
     sessions:
+      new:
+        header: "Enter the Guru Gates"
+        enter: "Enter"
       signed_in: "Signed in successfully."
       signed_out: "Signed out successfully."
       already_signed_out: "Signed out successfully."
@@ -53,6 +94,14 @@ en:
       send_instructions: "You will receive an email with instructions for how to unlock your account in a few minutes."
       send_paranoid_instructions: "If your account exists, you will receive an email with instructions for how to unlock it in a few minutes."
       unlocked: "Your account has been unlocked successfully. Please sign in to continue."
+    shared:
+      links:
+        log_in: "Log in"
+        sign_up: "Sign up"
+        forgot: "Forgot your password?"
+        confirmation: "Didn't receive confirmation instructions?"
+        unlock: "Didn't receive unlock instructions?"
+        omniauth: "Sign in with %{provider}"
   errors:
     messages:
       already_confirmed: "was already confirmed, please try signing in"

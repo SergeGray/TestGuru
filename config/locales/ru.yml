@@ -1,2 +1,81 @@
 ru:
-  hello: "Привет мир"
+  helpers:
+    submit:
+      test:
+        create: "Создать тест"
+        update: "Обновить тест"
+    label:
+      test:
+        title: &title "Название"
+        level: &level "Уровень"
+        author: &author "Автор"
+        category_id: &category "Категория"
+    select:
+      prompt: "Выберите:"
+
+  shared:
+    errors:
+      header:
+        one: "Обнаружена %{count} ошибка"
+        few: "Обнаружено %{count} ошибки"
+        many: "Обнаружено %{count} ошибок"
+        other: "Обнаружено %{count} ошибки"
+ 
+  admin:
+    tests:
+      test:
+        show: &show "Просмотр"
+        edit: &edit "Редактировать"
+        destroy: &destroy "Удалить"
+        confirm: &confirm "Вы уверены?"
+      index:
+        header: &tests-index-header "Доступные тесты"
+        title: *title
+        level: *level
+        author: *author
+        category: *category
+        questions: &questions "Вопросы"
+        actions: &actions "Действия"
+        new: "Новый тест"
+      edit:
+        header: "Редатирование теста"
+        show: *show
+        back: &back "Назад"
+      new:
+        header: "Новый тест"
+        back: *back
+      create:
+        success: "Тест успешно создан"
+      show:
+        title: *title
+        level: *level
+        author: *author
+        category: *category
+        questions: *questions
+        back: *back
+
+  tests:
+    test:
+      start: "Начать"
+    index:
+      header: *tests-index-header
+      title: *title
+      level: *level
+      author: *author
+      category: *category
+      questions: *questions
+      actions: *actions
+
+  attempts:
+    show:
+      header: "Вы проходите тест %{title}"
+      next: "Дальше"
+    result:
+      header: "Тест %{title} успешно завершён!" 
+      passed: "пройден"
+      failed: "провален"
+      back: *back
+
+  tests_mailer:
+    completed_test:
+      subject: "Вы прошли тест на TestGuru"

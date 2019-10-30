@@ -1,7 +1,7 @@
-<h1>The <%= @attempt.test.title %> Test was Completed!</h1>
+<h1><%= t('.header', title: @attempt.test.title) %></h1>
 
 <p>
   result: <%= result(@attempt) %>
 </p>
 
-<%= link_to 'Back', tests_path %>
+<%= link_to t(.'back'), tests_path %>

@@ -1,4 +1,4 @@
-<h1>Currently doing the <%= @attempt.test.title %> Test</h1>
+<h1><%= t('.header', title: @attempt.test.title) %></h1>
 
 <strong>
   <%= progress(@attempt) %> |
@@ -17,5 +17,5 @@
     <%= box.label %> 
   <% end %>
 
-  <%= form.submit "Next" %>
+  <%= form.submit t('.next') %>
 <% end %>

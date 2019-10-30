@@ -3,7 +3,7 @@ module AttemptsHelper
 
   def result(attempt)
     pass = attempt.successful? ? "passed" : "failed"
-    "<div class=#{pass}>#{attempt.score}% - #{pass}</div>".html_safe
+    "<div class=#{pass}>#{attempt.score}% - #{t('.' + pass)}</div>".html_safe
   end
 
   def progress(attempt)
