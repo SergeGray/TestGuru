@@ -1,15 +1,13 @@
-<% if user_signed_in? %>
-  <div class="nav user">
-    Welcome, <b><%= current_user.email %></b> Guru
-  </div>
-  <div class="nav user">
-    <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-  </div>
-<% else %>
-  <div class="nav user">
-    <%= link_to "Sign in", new_user_session_path %>
-  </div>
-  <div class="nav user">
-    <%= link_to "Register", new_user_registration_path %>
-  </div>
-<% end %>
+<nav class="navbar navbar-light bg-light">
+  <%= link_to 'TestGuru', root_path, class: 'navbar-brand' %>
+
+  <span class="navbar-text">
+    <% if user_signed_in? %>
+      Welcome, <b><%= current_user.email %></b> Guru
+      <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+    <% else %>
+      <%= link_to "Sign in", new_user_session_path %>
+      <%= link_to "Register", new_user_registration_path %>
+    <% end %>
+  </span>
+</nav>
