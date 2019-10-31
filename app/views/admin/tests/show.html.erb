@@ -1,25 +1,36 @@
-<p>
-<strong><%= t('.title') %>:</strong>
-  <%= @test.title %>
-</p>
+<div class="row justify-content-left mt-3">
+  <div class="col col-md-4">
+    <p>
+      <strong><%= t('.title') %>:</strong>
+      <%= @test.title %>
+    </p>
 
-<p>
-  <strong><%= t('.category') %>:</strong>
-  <%= @test.category.title %>
-</p>
-<p>
-  <strong><%= t('.level') %>:</strong>
-  <%= @test.level %>
-</p>
-<p>
-  <strong><%= t('.author') %>:</strong>
-  <%= @test.author.first_name %> <%= @test.author&.last_name %>
-</p>
+    <p>
+      <strong><%= t('.category') %>:</strong>
+      <%= @test.category.title %>
+    </p>
 
-<h2><%= t('.questions') %></h2>
-  <table>
-    <tbody>
-      <%= render @test.questions %>
-    </tbody>
-  </table>
-<%= link_to t('.back'), admin_tests_path %>
+    <p>
+      <strong><%= t('.level') %>:</strong>
+      <%= @test.level %>
+    </p>
+
+    <p>
+      <strong><%= t('.author') %>:</strong>
+      <%= @test.author.first_name %> <%= @test.author&.last_name %>
+    </p>
+  </div>
+</div>
+<div class="row justify-content-left mt-3">
+  <div class="col col-md-4">
+    <h2><%= t('.questions') %></h2>
+    <table>
+      <tbody>
+        <%= render @test.questions %>
+      </tbody>
+    </table>
+    <div class="mt-1">
+      <%= link_to t('.back'), admin_tests_path %>
+    </div>
+  </div>
+</div>
