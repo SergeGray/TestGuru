@@ -12,6 +12,10 @@ RSpec.describe AttemptsHelper, type: :helper do
   let!(:answer) { question.answers.create!(body: "1995", correct: true) }
   let(:attempt) { Attempt.create!(test: test, user: user) }
 
+  before(:each) do
+    helper.instance_variable_set(:@virtual_path, "attempts.result")
+  end
+
   describe "#result" do
     context "with passing score" do
       it "returns result with green font and passing message" do

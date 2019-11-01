@@ -17,8 +17,8 @@ RSpec.describe ApplicationHelper, type: :helper do
 
   describe "#flash_message" do
     it "generates a content tag for flash message of specified type" do
-      expect(flash_message("Hello", :greet)).to eq(
-        content_tag(:div, "Hello", class: "flash greet")
+      expect(flash_message("Hello", "notice")).to eq(
+        content_tag(:div, "Hello", class: "alert alert-success")
       )
     end
   end
