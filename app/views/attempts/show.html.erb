@@ -17,5 +17,6 @@
     <%= box.label %> 
   <% end %>
 
+  <%= link_to t('.gist'), gist_attempt_path(@attempt), method: :post %>
   <%= form.submit t('.next') %>
 <% end %>

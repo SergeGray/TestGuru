@@ -1,6 +1,6 @@
 class AttemptsController < ApplicationController
   before_action :authenticate_user!, except: :result
-  before_action :set_attempt, only: %i[show update result]
+  before_action :set_attempt, only: %i[show update result gist]
 
   def show; end
 
@@ -18,6 +18,19 @@ class AttemptsController < ApplicationController
       else
         format.html { render :show }
       end
+    end
+  end
+
+  def gist
+    result = GistQuestionService.new(@attempt.current_question).call
+    flash_options = if result.success?
+                      { notice: t('.success') }
+                    else
+                      { alert: t('.failure') }
+                    end
+
+    respond_to do |format|
+      format.html { redirect_to @attempt, flash_options }
     end
   end
 

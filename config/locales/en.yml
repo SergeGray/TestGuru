@@ -68,11 +68,15 @@ en:
     show:
       header: "Currently doing the %{title} Test"
       next: "Next"
+      gist: "Create Gist question"
     result:
       header: "The %{title} Test successfully completed!"
       passed: "passed"
       failed: "failed"
       back: *back
+    gist:
+      success: "Successfully created Gist"
+      failure: "Failed to create Gist"
 
   tests_mailer:
     completed_test:

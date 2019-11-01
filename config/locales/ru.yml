@@ -70,11 +70,15 @@ ru:
     show:
       header: "Вы проходите тест %{title}"
       next: "Дальше"
+      gist: "Создать Gist с вопросом"
     result:
       header: "Тест %{title} успешно завершён!" 
       passed: "пройден"
       failed: "провален"
       back: *back
+    gist:
+      success: "Gist создан"
+      failure: "Не удалось создать Gist"
 
   tests_mailer:
     completed_test:
