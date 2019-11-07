@@ -37,6 +37,7 @@ ru:
         questions: &questions "Вопросы"
         actions: &actions "Действия"
         new: "Новый тест"
+        gists: &gists "Созданные Gist'ы"
       edit:
         header: "Редатирование теста"
         show: *show
@@ -52,6 +53,13 @@ ru:
         author: *author
         category: *category
         questions: *questions
+        back: *back
+    gists:
+      index:
+        header: *gists
+        question: "Вопрос"
+        url: "Ссылка"
+        user: "Пользователь"
         back: *back
 
   tests:
@@ -79,6 +87,7 @@ ru:
     gist:
       success: "Gist создан"
       failure: "Не удалось создать Gist"
+      gist_link: "ССылка на Gist"
 
   tests_mailer:
     completed_test:

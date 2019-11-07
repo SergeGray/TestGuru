@@ -35,6 +35,7 @@ en:
         questions: &questions "Questions"
         actions: &actions "Actions"
         new: "New Test"
+        gists: &gists "Created Gists"
       edit:
         header: "Editing Test"
         show: *show
@@ -50,6 +51,13 @@ en:
         author: *author
         category: *category
         questions: *questions
+        back: *back
+    gists:
+      index:
+        header: *gists
+        question: "Question"
+        url: "Url"
+        user: "User"
         back: *back
 
   tests:
@@ -76,6 +84,7 @@ en:
       back: *back
     gist:
       success: "Successfully created Gist"
+      gist_link: "Link to the Gist"
       failure: "Failed to create Gist"
 
   tests_mailer:

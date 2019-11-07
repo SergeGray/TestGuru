@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :created_tests, class_name: "Test",
                            foreign_key: "author_id",
                            dependent: :nullify
+  has_many :gists, dependent: :destroy
 
   validates :first_name, presence: true
 

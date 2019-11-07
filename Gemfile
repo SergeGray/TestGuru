@@ -41,6 +41,8 @@ gem 'devise', '~> 4.0'
 
 gem 'faraday'
 
+gem "octokit", "~> 4.0"
+
 gem 'rails-i18n', '~> 5.0.0'
 
 gem 'jquery-rails'
@@ -51,6 +53,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'capybara'
+  gem 'dotenv-rails'
   gem 'rspec-rails', '~> 3.8'
 end
 
