@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col">
+    <h1><%= t('.header') %></h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-4"><%= t('.question') %></div>
+  <div class="col-4"><%= t('.url') %></div>
+  <div class="col-4"><%= t('.user') %></div>
+</div>
+
+<%= render @gists %>
+
+<div class="mt-1">
+  <%= link_to t('.back'), admin_tests_path %>
+</div>
