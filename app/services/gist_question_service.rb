@@ -1,15 +1,29 @@
 class GistQuestionService
-  def initialize(question, client: nil)
+  def initialize(question, client: default_client)
     @question = question
     @test = @question.test
-    @client = client || GithubClient.new
+    @client = client
   end
 
   def call
-    @client.create_gist(gist_params)
+    response = Struct.new(:gist) do
+      def success?
+        gist.key?(:html_url)
+      end
+
+      def url
+        gist[:html_url]
+      end
+    end
+
+    response[@client.create_gist(gist_params)]
   end
 
   private
+
+  def default_client
+    GithubClient.new
+  end
 
   def gist_params
     {

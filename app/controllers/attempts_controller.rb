@@ -23,13 +23,13 @@ class AttemptsController < ApplicationController
 
   def gist
     response = GistQuestionService.new(@attempt.current_question).call
-    if response.key?(:html_url)
+    if response.success?
       Gist.create!(
         user: current_user,
-        url: response[:html_url],
+        url: response.url,
         question: @attempt.current_question
       )
-      flash[:notice] = "#{t('.success')}<br>#{gist_link(response)}<br />"
+      flash[:notice] = "#{t('.success')}<br>#{gist_link(response.url)}<br />"
     else
       flash[:alert] =  t('.failure')
     end
@@ -45,7 +45,7 @@ class AttemptsController < ApplicationController
     @attempt = Attempt.find(params[:id])
   end
 
-  def gist_link(response)
-    view_context.link_to t('.gist_link'), response[:html_url], target: "_blank"
+  def gist_link(url)
+    view_context.link_to t('.gist_link'), url, target: "_blank"
   end
 end
