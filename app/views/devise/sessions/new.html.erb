@@ -21,6 +21,7 @@
               <%= f.password_field :password, 
                                    autocomplete: "current-password",
                                    class: "form-control" %>
+              <%= octicon "stop", class: "text-fail hide" %>
             </p>
 
             <% if devise_mapping.rememberable? %>
