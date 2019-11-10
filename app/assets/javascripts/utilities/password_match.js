@@ -17,7 +17,7 @@ function passwordCompare(confirmationEvent) {
   if (password.value == passwordConfirmation.value) {
     hideIcons(dangerIcons);
     revealIcons(successIcons);
-  } else if (password.value) {
+  } else if (passwordConfirmation.value) {
     hideIcons(successIcons);
     revealIcons(dangerIcons);
   } else {
