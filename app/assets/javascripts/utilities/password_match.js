@@ -14,39 +14,30 @@ function passwordCompare(confirmationEvent) {
   var successIcons = document.querySelectorAll('.octicon-check');
   var dangerIcons = document.querySelectorAll('.octicon-stop');
 
-  if (passwordConfirmation.value) {
-    if (password.value == passwordConfirmation.value) {
-      // hide danger icons and reveal success icons
-      if (successIcons[0].classList.contains('hide')) {
-        dangerIcons.forEach(function(icon) {
-          icon.classList.add('hide');
-        })
-        successIcons.forEach(function(icon) {
-          icon.classList.remove('hide');
-        })
-      }
-    } else {
-      // hide success icons and reveal danger icons
-      if (dangerIcons[0].classList.contains('hide')) {
-        successIcons.forEach(function(icon) {
-          icon.classList.add('hide');
-        })
-        dangerIcons.forEach(function(icon) {
-          icon.classList.remove('hide');
-        })
-      }
-    }
+  if (password.value == passwordConfirmation.value) {
+    hideIcons(dangerIcons);
+    revealIcons(successIcons);
+  } else if (password.value) {
+    hideIcons(successIcons);
+    revealIcons(dangerIcons);
   } else {
-    // hide all icons
-    if (!successIcons[0].classList.contains('hide')) {
-      successIcons.forEach(function(icon) {
-        icon.classList.add('hide');
-      })
-    }
-    if (!dangerIcons[0].classList.contains('hide')) {
-      dangerIcons.forEach(function(icon) {
-        icon.classList.add('hide');
-      })
-    }
+    hideIcons(successIcons);
+    hideIcons(dangerIcons);
+  }
+}
+
+function hideIcons(icons) {
+  if (!icons[0].classList.contains('hide')) {
+    icons.forEach(function(icon) {
+      icon.classList.add('hide');
+    })
+  }
+}
+
+function revealIcons(icons) {
+  if (icons[0].classList.contains('hide')) {
+    icons.forEach(function(icon) {
+      icon.classList.remove('hide');
+    })
   }
 }
