@@ -3,7 +3,12 @@ module AttemptsHelper
 
   def result(attempt)
     pass = attempt.successful? ? "passed" : "failed"
-    "<div class=#{pass}>#{attempt.score}% - #{t('.' + pass)}</div>".html_safe
+    p_class = { "passed" => "text-success", "failed" => "text-danger" }
+    content_tag(
+      :p,
+      "#{attempt.score}% - #{t('.' + pass)}",
+      class: p_class[pass]
+    )
   end
 
   def progress(attempt)

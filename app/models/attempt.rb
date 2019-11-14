@@ -33,6 +33,10 @@ class Attempt < ApplicationRecord
     score > 85
   end
 
+  def progress
+    100 * (current_question_index + 1) / total_questions
+  end
+
   private
 
   def correct_answers

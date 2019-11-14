@@ -1,22 +1,40 @@
-<h1><%= t('.header', title: @attempt.test.title) %></h1>
+<div class="row">
+  <div class="col">
+    <h1><%= t('.header', title: @attempt.test.title) %></h1>
+    <p>
+      <%= content_tag :div, class: 'progress' do %>
+        <%= content_tag :div,
+                        progress(@attempt),
+                        class: 'progress-bar progress-bar-striped',
+                        role: 'progressbar',
+                        data: { progress: @attempt.progress } %>
+                    <% end %>
+    </p>
+    <p>
+      <strong><%= @attempt.current_question.body %></strong>
+    </p>
+    
+    <%= form_with url: attempt_path(@attempt),
+                  local: true, 
+                  method: :put do |form| %>
+      <div class="form-group">
+        <%= form.collection_check_boxes :answer_ids,
+                                        @attempt.current_question.answers,
+                                        :id,
+                                        :body,
+                                        include_hidden: false do |box| %>
+          <p>
+            <%= box.check_box id: "answer_ids_#{box.object_id}" %>
+            <%= box.label %>
+          </p>
+        <% end %>
 
-<strong>
-  <%= progress(@attempt) %> |
-  <%= @attempt.current_question.body %>
-</strong>
+        <%= form.submit t('.next') %>
+      </div>
+    <% end %>
 
-<%= form_with url: attempt_path(@attempt),
-              local: true, 
-              method: :put do |form| %>
-  <%= form.collection_check_boxes :answer_ids,
-                                  @attempt.current_question.answers,
-                                  :id,
-                                  :body,
-                                  include_hidden: false do |box| %>
-    <%= box.check_box id: "answer_ids_#{box.object_id}" %>
-    <%= box.label %> 
-  <% end %>
-
-  <%= link_to t('.gist'), gist_attempt_path(@attempt), method: :post %>
-  <%= form.submit t('.next') %>
-<% end %>
+    <div class="mt-1">
+      <%= link_to t('.gist'), gist_attempt_path(@attempt), method: :post %>
+    </div>
+  </div>
+</div>
