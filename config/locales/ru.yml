@@ -54,6 +54,8 @@ ru:
         category: *category
         questions: *questions
         back: *back
+      form_inline:
+        submit: "ОК"
     gists:
       index:
         header: *gists

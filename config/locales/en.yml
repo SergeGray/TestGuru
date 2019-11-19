@@ -52,6 +52,8 @@ en:
         category: *category
         questions: *questions
         back: *back
+      form_inline:
+        submit: "OK"
     gists:
       index:
         header: *gists
