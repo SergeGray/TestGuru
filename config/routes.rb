@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'feedback/index'
   root 'tests#index'
 
   devise_for :users, controllers: { sessions: 'users/sessions' }
@@ -25,4 +26,8 @@ Rails.application.routes.draw do
 
     resources :gists, only: :index
   end
+
+  resources :feedback, only: :index
+
+  post 'feedback/send', to: 'feedback#send_message', as: :send_feedback
 end
