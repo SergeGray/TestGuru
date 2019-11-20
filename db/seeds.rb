@@ -11,13 +11,15 @@ users = User.create!(
       first_name: 'Serge',
       last_name: 'Shayderov',
       email: 's@shayderov.ru',
-      password: 'epic88password70',
+      password: '123123',
       type: 'Admin'
     },
     {
       first_name: 'Vladimir',
+      last_name: 'Putin',
       email: 'vladimir@gmail.com',
       password: '123123',
+      type: 'Admin'
     },
     {
       first_name: 'Dmitry',

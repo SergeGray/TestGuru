@@ -25,8 +25,4 @@ Rails.application.routes.draw do
 
     resources :gists, only: :index
   end
-
-  resources :feedback, only: :index
-
-  post 'feedback/send', to: 'feedback#send_message', as: :send_feedback
 end
