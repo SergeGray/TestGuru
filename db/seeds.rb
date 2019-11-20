@@ -5,7 +5,6 @@ categories = Category.create!(
     { title: 'Low level' }
   ]
 )
-
 users = User.create!(
   [
     {
@@ -13,36 +12,30 @@ users = User.create!(
       last_name: 'Shayderov',
       email: 's@shayderov.ru',
       password: 'epic88password70',
-      type: 'Admin',
-      confirmed_at: Time.zone.now
+      type: 'Admin'
     },
     {
       first_name: 'Vladimir',
-      email: 'vladimir@fake.mail',
+      email: 'vladimir@gmail.com',
       password: '123123',
-      confirmed_at: Time.zone.now
     },
     {
       first_name: 'Dmitry',
-      email: 'dmitry@fake.mail',
-      password: 'password',
-      confirmed_at: Time.zone.now
+      email: 'dmitry@yandex.ru',
+      password: 'password'
     },
     {
       first_name: 'Angrey',
-      email: 'andrey@fake.mail',
-      password: 'qwerty',
-      confirmed_at: Time.zone.now
+      email: 'andrey@hotmail.com',
+      password: 'qwerty'
     },
     {
       first_name: 'Egor',
-      email: 'egor@fake.mail',
-      password: 'dQw4w9WgXcQ',
-      confirmed_at: Time.zone.now
+      email: 'egor@mail.ru',
+      password: 'dQw4w9WgXcQ'
     }
   ]
 )
-
 tests = Test.create!(
   [
     {
@@ -76,7 +69,6 @@ tests = Test.create!(
     }
   ]
 )
-
 questions = Question.create!(
   [
     { body: 'Python standard indentation length in spaces', test: tests.first },
@@ -87,7 +79,6 @@ questions = Question.create!(
     { body: 'Which of the following is not a standard view file name?', test: tests.third }
   ]
 )
-
 Answer.create!(
   [
     { body: '2', question: questions.first },
