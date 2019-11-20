@@ -89,22 +89,6 @@ en:
       gist_link: "Link to the Gist"
       failure: "Failed to create Gist"
 
-  feedback:
-    index:
-      header: "Send feedback"
-      feedback_prompt: "Your message here"
-      send: "Send"
-      main: "Back to main page"
-
-  feedback_mailer:
-    send_feedback:
-      subject: "Feedback message from TestGuru"
-
   tests_mailer:
     completed_test:
       subject: "You've just completed a TestGuru test"
-
-  footer:
-    author_name: "Sergey Shayderov"
-    site_description: "Simple quiz application, training project for online-school"
-    feedback: "Feedback"
