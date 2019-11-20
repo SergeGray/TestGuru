@@ -105,3 +105,8 @@ ru:
   tests_mailer:
     completed_test:
       subject: "Вы прошли тест на TestGuru"
+
+  footer:
+    author_name: "Сергей Шайдеров"
+    site_description: "Приложение с прохождением тестов, учебный проект в онлайн-школе"
+    feedback: "Обратная связь"

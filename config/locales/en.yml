@@ -103,3 +103,8 @@ en:
   tests_mailer:
     completed_test:
       subject: "You've just completed a TestGuru test"
+
+  footer:
+    author_name: "Sergey Shayderov"
+    site_description: "Simple quiz application, training project for online-school"
+    feedback: "Feedback"
