@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'feedback/index'
   root 'tests#index'
 
   devise_for :users, controllers: { sessions: 'users/sessions' }
