@@ -91,22 +91,6 @@ ru:
       failure: "Не удалось создать Gist"
       gist_link: "ССылка на Gist"
 
-  feedback:
-    index:
-      header: "Обратная связь"
-      feedback_prompt: "Ваше сообщение"
-      send: "Отправить"
-      main: "Вернуться на главную"
-
-  feedback_mailer:
-    send_feedback:
-      subject: "Сообщение от пользователя TestGuru"
-
   tests_mailer:
     completed_test:
       subject: "Вы прошли тест на TestGuru"
-
-  footer:
-    author_name: "Сергей Шайдеров"
-    site_description: "Приложение с прохождением тестов, учебный проект в онлайн-школе"
-    feedback: "Обратная связь"
