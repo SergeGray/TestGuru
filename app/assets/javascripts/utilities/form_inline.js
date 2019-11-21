@@ -34,6 +34,6 @@ function formInlineHandler(testId) {
   } else {
     testTitle.classList.remove('hide');
     formInline.classList.add('hide');
-    link.textContent = 'Edit';
+    link.textContent = 'Edit Title';
   }
 }

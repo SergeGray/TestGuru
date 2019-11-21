@@ -26,6 +26,7 @@ en:
         edit: &edit "Edit"
         destroy: &destroy "Destroy"
         confirm: &confirm "Are you sure?"
+        edit_title: "Edit Title"
       index:
         header: &tests-index-header "Available Tests"
         title: *title
@@ -52,8 +53,14 @@ en:
         category: *category
         questions: *questions
         back: *back
+        add: "Add"
       form_inline:
         submit: "OK"
+    questions:
+      question:
+        show: *show
+        destroy: *destroy
+        confirm: *confirm
     gists:
       index:
         header: *gists
@@ -95,6 +102,9 @@ en:
       feedback_prompt: "Your message here"
       send: "Send"
       main: "Back to main page"
+    send_message:
+      success: "Email sent"
+      failure: "Wrong parameters, failed to send email"
 
   feedback_mailer:
     send_feedback:

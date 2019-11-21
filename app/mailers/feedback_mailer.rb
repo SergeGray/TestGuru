@@ -1,9 +1,10 @@
 class FeedbackMailer < ApplicationMailer
-  def send_feedback(user, content)
-    @user = user
-    @content = content
-    admin = User.find_by(type: "Admin")
+  default to: -> { User.find_by(type: "Admin").email }
 
-    mail to: admin.email
+  def send_feedback(email, content)
+    @email = email
+    @content = content
+
+    mail from: @email
   end
 end

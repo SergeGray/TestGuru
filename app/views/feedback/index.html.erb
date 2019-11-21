@@ -6,10 +6,15 @@
         <%= form_with url: send_feedback_path, method: :post do |f| %>
           <div class="form-group">
             <p>
+              <%= f.label :email %>
+              <%= f.email_field :email,
+                                class: "form-control" %>
+            </p>
+            <p>
               <%= f.label :feedback %>
               <%= f.text_area :content,
                               rows: "10",
-                              class: "form-control input-lg",
+                              class: "form-control",
                               placeholder: t('.feedback_prompt') %>
             </p>
 

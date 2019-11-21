@@ -1,13 +1,12 @@
 class FeedbackController < ApplicationController
-  before_action :authenticate_user!
-
   def index; end
 
   def send_message
-    content = params[:content]
+    email, content = feedback_params
     respond_to do |format|
-      if FeedbackMailer.send_feedback(current_user, content).deliver_now
-        format.html { redirect_to root_path }
+      if email && content
+        FeedbackMailer.send_feedback(email, content).deliver_now
+        format.html { redirect_to root_path, notice: t('.success') }
       else
         format.html { render :index }
       end
@@ -17,6 +16,8 @@ class FeedbackController < ApplicationController
   private
 
   def feedback_params
-    params.permit(:content)
+    params
+      .reject { |k, v| k == :email && v !~ URI::MailTo::EMAIL_REGEXP }
+        .permit(:email, :content)
   end
 end

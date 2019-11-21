@@ -28,6 +28,7 @@ ru:
         edit: &edit "Редактировать"
         destroy: &destroy "Удалить"
         confirm: &confirm "Вы уверены?"
+        edit_title: "Поменять название"
       index:
         header: &tests-index-header "Доступные тесты"
         title: *title
@@ -54,8 +55,14 @@ ru:
         category: *category
         questions: *questions
         back: *back
+        add: "Добавить"
       form_inline:
         submit: "ОК"
+    questions:
+      question:
+        confirm: *confirm
+        show: *show
+        destroy: *destroy
     gists:
       index:
         header: *gists
@@ -97,6 +104,9 @@ ru:
       feedback_prompt: "Ваше сообщение"
       send: "Отправить"
       main: "Вернуться на главную"
+    send_message:
+      success: "Email отправлен"
+      failure: "Не удалось отправить Email"
 
   feedback_mailer:
     send_feedback:
