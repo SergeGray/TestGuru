@@ -20,6 +20,8 @@ users = User.create!(
       first_name: 'Vladimir',
       email: 'vladimir@fake.mail',
       password: '123123',
+      confirmed_at: Time.zone.now
+
     },
     {
       first_name: 'Dmitry',

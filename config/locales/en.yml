@@ -97,14 +97,13 @@ en:
       failure: "Failed to create Gist"
 
   feedback:
-    index:
+    new:
       header: "Send feedback"
       feedback_prompt: "Your message here"
       send: "Send"
       main: "Back to main page"
-    send_message:
+    create:
       success: "Email sent"
-      failure: "Wrong parameters, failed to send email"
 
   feedback_mailer:
     send_feedback:

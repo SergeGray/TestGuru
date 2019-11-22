@@ -99,14 +99,13 @@ ru:
       gist_link: "ССылка на Gist"
 
   feedback:
-    index:
+    new:
       header: "Обратная связь"
       feedback_prompt: "Ваше сообщение"
       send: "Отправить"
       main: "Вернуться на главную"
-    send_message:
+    create:
       success: "Email отправлен"
-      failure: "Не удалось отправить Email"
 
   feedback_mailer:
     send_feedback:

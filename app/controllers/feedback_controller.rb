@@ -1,23 +1,23 @@
 class FeedbackController < ApplicationController
-  def index; end
+  def new
+    @feedback = Feedback.new
+  end
 
-  def send_message
-    email, content = feedback_params
+  def create
+    @feedback = Feedback.new(feedback_params)
     respond_to do |format|
-      if email && content
-        FeedbackMailer.send_feedback(email, content).deliver_now
+      if @feedback.save
+        FeedbackMailer.send_feedback(@feedback).deliver_now
         format.html { redirect_to root_path, notice: t('.success') }
       else
-        format.html { render :index }
+        format.html { render :new }
       end
     end
   end
-  
+
   private
 
   def feedback_params
-    params
-      .reject { |k, v| k == :email && v !~ URI::MailTo::EMAIL_REGEXP }
-        .permit(:email, :content)
+    params.require(:feedback).permit(:email, :content)
   end
 end
