@@ -1,5 +1,5 @@
 class FeedbackMailer < ApplicationMailer
-  default to: -> { User.find_by(type: "Admin").email }
+  default to: Admin.first.email
 
   def send_feedback(feedback)
     @email = feedback.email

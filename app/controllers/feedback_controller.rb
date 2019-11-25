@@ -6,7 +6,7 @@ class FeedbackController < ApplicationController
   def create
     @feedback = Feedback.new(feedback_params)
     respond_to do |format|
-      if @feedback.save
+      if @feedback.valid?
         FeedbackMailer.send_feedback(@feedback).deliver_now
         format.html { redirect_to root_path, notice: t('.success') }
       else
