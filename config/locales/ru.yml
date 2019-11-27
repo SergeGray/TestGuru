@@ -96,7 +96,7 @@ ru:
     gist:
       success: "Gist создан"
       failure: "Не удалось создать Gist"
-      gist_link: "ССылка на Gist"
+      gist_link: "Ссылка на Gist"
 
   feedback:
     new:
