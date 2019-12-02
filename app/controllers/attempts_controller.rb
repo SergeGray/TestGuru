@@ -12,7 +12,7 @@ class AttemptsController < ApplicationController
     respond_to do |format|
       if @attempt.completed?
         format.html do
-          TestsMailer.completed_test(@attempt).deliver_now
+          @attempt.finalize
           redirect_to result_attempt_path(@attempt)
         end
       else

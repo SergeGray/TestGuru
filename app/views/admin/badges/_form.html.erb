@@ -1,0 +1,43 @@
+<%= form_with model: [:admin, @badge], local: true do |form| %>
+  <%= render 'shared/errors', resource: @badge %>
+
+  <div class="form-group">
+    <p>
+      <%= form.label :name %>
+      <%= form.text_field :name, id: :badge_name, class: "form-control" %>
+    </p>
+
+    <p>
+      <%= form.label :image_url %>
+      <%= form.text_field :image_url,
+                          id: :badge_image_url,
+                          class: "form-control" %>
+    </p>
+
+    <p>
+      <%= form.label :description %>
+      <%= form.text_area :description,
+                          id: :badge_description,
+                          class: "form-control" %>
+    </p>
+
+    <p>
+      <%= form.label :condition %>
+      <%= form.collection_select :condition,
+                                  options,
+                                  :first,
+                                  :first,
+                                  prompt: true,
+                                  class: "form-control" %>
+    </p>
+
+    <p>
+      <%= form.label :condition_value %>
+      <%= form.number_field :condition_value,
+                            id: :badge_condition_value,
+                            class: "form-control" %>
+    </p>
+
+    <%= form.submit class: 'btn btn-primary' %>
+  </div>
+<% end %>

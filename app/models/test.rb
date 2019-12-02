@@ -4,6 +4,8 @@ class Test < ApplicationRecord
   has_many :questions, dependent: :destroy
   has_many :attempts, dependent: :destroy
   has_many :users, through: :attempts
+  has_many :user_badges, through: :user_badge_tests
+  has_many :user_badge_tests, dependent: :destroy
 
   validates :title, presence: true
   validates :level, numericality: {
@@ -17,9 +19,9 @@ class Test < ApplicationRecord
   scope :medium, -> { of_level(2..4) }
   scope :hard, -> { of_level(5..Float::INFINITY) }
   scope :of_category, (
-    lambda do |category_title|
+    lambda do |category_id|
       joins(:category)
-        .where(categories: { title: category_title })
+        .where(categories: { id: category_id })
         .order(id: :desc)
     end
   )

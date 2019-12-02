@@ -37,7 +37,31 @@ class Attempt < ApplicationRecord
     100 * (current_question_index + 1) / total_questions
   end
 
+  def finalize
+    send_completion_email
+    update_badges if successful?
+  end
+
   private
+
+  def send_completion_email
+    TestsMailer.completed_test(self).deliver_now
+  end
+
+  def update_badges
+    Badge.populate(user) if user.badges.count.zero?
+
+    Badge.all.each do |badge|
+      if badge.accepts?(self)
+        badge_progress(user.user_badge(badge))
+      end
+    end
+  end
+
+  def badge_progress(user_badge)
+    user_badge.push(test)
+    user_badge.award
+  end
 
   def correct_answers
     current_question.answers.correct

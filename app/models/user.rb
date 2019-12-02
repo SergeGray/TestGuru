@@ -5,6 +5,8 @@ class User < ApplicationRecord
                            foreign_key: "author_id",
                            dependent: :nullify
   has_many :gists, dependent: :destroy
+  has_many :user_badges, dependent: :destroy
+  has_many :badges, through: :user_badges
 
   validates :first_name, presence: true
 
@@ -24,7 +26,15 @@ class User < ApplicationRecord
     attempts.order(id: :desc).find_by(test_id: test.id)
   end
 
+  def user_badge(badge)
+    user_badges.order(id: :desc).find_by(badge_id: badge.id, completed: false)
+  end
+
   def admin?
     is_a?(Admin)
+  end
+
+  def successful_attempts
+    attempts.filter(&:successful?)
   end
 end
