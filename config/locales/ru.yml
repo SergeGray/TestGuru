@@ -28,6 +28,7 @@ ru:
         edit: &edit "Редактировать"
         destroy: &destroy "Удалить"
         confirm: &confirm "Вы уверены?"
+        edit_title: "Поменять название"
       index:
         header: &tests-index-header "Доступные тесты"
         title: *title
@@ -54,8 +55,14 @@ ru:
         category: *category
         questions: *questions
         back: *back
+        add: "Добавить"
       form_inline:
         submit: "ОК"
+    questions:
+      question:
+        confirm: *confirm
+        show: *show
+        destroy: *destroy
     gists:
       index:
         header: *gists
@@ -89,8 +96,26 @@ ru:
     gist:
       success: "Gist создан"
       failure: "Не удалось создать Gist"
-      gist_link: "ССылка на Gist"
+      gist_link: "Ссылка на Gist"
+
+  feedback:
+    new:
+      header: "Обратная связь"
+      feedback_prompt: "Ваше сообщение"
+      send: "Отправить"
+      main: "Вернуться на главную"
+    create:
+      success: "Email отправлен"
+
+  feedback_mailer:
+    send_feedback:
+      subject: "Сообщение от пользователя TestGuru"
 
   tests_mailer:
     completed_test:
       subject: "Вы прошли тест на TestGuru"
+
+  footer:
+    author_name: "Сергей Шайдеров"
+    site_description: "Приложение с прохождением тестов, учебный проект в онлайн-школе"
+    feedback: "Обратная связь"

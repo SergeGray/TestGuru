@@ -1,0 +1,35 @@
+<div class="row justify-content-center mt-3">
+  <div class="col col-md-6">
+    <h2><%= t('.header') %></h2>
+    <div class="card border-primary">
+      <div class="card-body">
+        <%= form_with model: @feedback,
+                      url: feedback_index_path(@feedback),
+                      local: true do |f| %>
+          <div class="form-group">
+          <p>
+          <%= render 'shared/errors', resource: @feedback %>
+          </p>
+            <p>
+              <%= f.label :email %>
+              <%= f.email_field :email,
+                                class: "form-control" %>
+            </p>
+            <p>
+              <%= f.label :feedback %>
+              <%= f.text_area :content,
+                              rows: "10",
+                              class: "form-control",
+                              placeholder: t('.feedback_prompt') %>
+            </p>
+
+            <%= f.submit t('.send'), class: 'btn btn-primary' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="mt-1">
+      <%= link_to t('.main'), root_path %>
+    </div>
+  </div>
+</div>

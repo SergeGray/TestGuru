@@ -1,5 +1,12 @@
-<p><%= current_year %> |
-Shayderov Sergey |
-<%= link_to 'TestGuru', github_url('SergeGray', 'TestGuru') %></p>
-<p>Simple quiz application, training project for online-school
-<%= link_to 'Thinknetica', 'http://thinknetica.com/' %>
+<p>
+  <%= current_year %> |
+  <%= t('footer.author_name') %> |
+  <%= link_to 'TestGuru', github_url('SergeGray', 'TestGuru') %>
+</p>
+<p>
+  <%= t('footer.site_description') %>
+  <%= link_to 'Thinknetica', 'http://thinknetica.com/' %>
+</p>
+<p>
+  <%= link_to t('footer.feedback'), new_feedback_path %>
+</p>

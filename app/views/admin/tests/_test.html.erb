@@ -16,7 +16,10 @@
     <%= link_to t('.show'), admin_test_path(test) %>
   </td>
   <td class="align-middle">
-    <%= link_to t('.edit'),
+    <%= link_to t('.edit'), edit_admin_test_path(test) %>
+  </td>
+  <td class="align-middle">
+    <%= link_to t('.edit_title'),
                 edit_admin_test_path(test),
                 data: { test_id: test.id },
                 class: 'form-inline-link' %>

@@ -14,7 +14,7 @@ module TestGuru
     config.time_zone = 'Moscow'
     config.i18n.default_locale = :en
 
-    config.autoload_paths << "#{Rails.root}/lib/clients"
+    config.eager_load_paths << "#{Rails.root}/lib/clients"
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
