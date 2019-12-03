@@ -105,3 +105,37 @@ Answer.create!(
     { body: 'change', question: questions.last, correct: true }
   ]
 )
+
+Badge.create!(
+  [
+    {
+      name: "Ace",
+      image_url: "https://cdn.iconscout.com/icon/premium/png-256-thumb/"\
+                 "spade-ace-card-624103.png",
+      description: "Complete 2 tests on your first try",
+      condition: "first_try",
+      condition_value: 2
+    }, {
+      name: "Talented",
+      image_url: "https://cdn.iconscout.com/icon/premium/png-256-thumb/"\
+                 "teapot-76-842187.png",
+      description: "complete all beginner (0) level tests",
+      condition: "all_with_level",
+      condition_value: 0
+    }, {
+      name: "Scripter",
+      image_url: "https://sysengtales.salehram.com/wp-content/uploads/"\
+                 "2017/07/option-script-configuration-api-256.png",
+      description: "Complete all tests in the Scripting category",
+      condition: "all_in_category",
+      condition_value: 3
+    }, {
+      name: "Perfectionist",
+      image_url: "https://cdn.iconscout.com/icon/premium/png-256-thumb/"\
+                 "perfect-6-820963.png",
+      description: "Complete 2 tests with a perfect score",
+      condition: "perfect_score",
+      condition_value: 2
+    }
+  ]
+)

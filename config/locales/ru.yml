@@ -70,6 +70,29 @@ ru:
         url: "Ссылка"
         user: "Пользователь"
         back: *back
+    badges:
+      badge:
+        show: *show
+        edit: *edit
+        destroy: *destroy
+        confirm: *confirm
+      index:
+        header: &badges-index-header "Бейджи"
+        name: &name "Имя"
+        icon: &icon "Иконка"
+        actions: *actions
+      edit:
+        header: "Редактировать Бейдж"
+        show: *show
+        back: *back
+      new:
+        header: "Новый бейдж"
+        back: *back
+      show:
+        name: *name
+        icon: *icon
+        description: &description "Описание"
+        back: *back
 
   tests:
     test:
@@ -97,6 +120,20 @@ ru:
       success: "Gist создан"
       failure: "Не удалось создать Gist"
       gist_link: "Ссылка на Gist"
+
+  badges:
+    index:
+      header: *badges-index-header
+      name: *name
+      icon: *icon
+      count: "Количество"
+      progress: "Прогресс"
+      actions: *actions
+    show:
+        name: *name
+        icon: *icon
+        description: *description
+        back: *back
 
   feedback:
     new:

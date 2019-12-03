@@ -24,10 +24,18 @@ class Badge < ApplicationRecord
     send(condition, attempt)
   end
 
+  def user_badge_count(user)
+    user_badges.where(user_id: user.id, completed: true).count
+  end
+
+  def user_badge(user)
+    user_badges.order(id: :desc).find_by(user_id: user.id, completed: false)
+  end
+
   def required_amount
     case condition
-    when :all_with_level then Test.of_level(condition_value).count
-    when :all_in_category then Test.of_category(condition_value).count
+    when "all_with_level" then Test.of_level(condition_value).count
+    when "all_in_category" then Test.of_category(condition_value).count
     else condition_value
     end
   end
@@ -46,7 +54,7 @@ class Badge < ApplicationRecord
     attempt.test.category.id = condition_value
   end
 
-  def perfect_score(user)
+  def perfect_score(attempt)
     attempt.score == 100
   end
 end

@@ -59,7 +59,7 @@ class Attempt < ApplicationRecord
   end
 
   def badge_progress(user_badge)
-    user_badge.push(test)
+    user_badge.tests.push(test)
     user_badge.award
   end
 
