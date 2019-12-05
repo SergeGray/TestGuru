@@ -37,9 +37,9 @@ class Attempt < ApplicationRecord
     100 * (current_question_index + 1) / total_questions
   end
 
-  def finalize
+  def finalize(user)
     send_completion_email
-    update_badges if successful?
+    update_badges(user) if successful?
   end
 
   private
@@ -49,18 +49,7 @@ class Attempt < ApplicationRecord
   end
 
   def update_badges
-    Badge.populate(user) if user.badges.count.zero?
-
-    Badge.all.each do |badge|
-      if badge.accepts?(self)
-        badge_progress(user.user_badge(badge))
-      end
-    end
-  end
-
-  def badge_progress(user_badge)
-    user_badge.tests.push(test)
-    user_badge.award
+    user.badges << BadgeAwardService.new(self).call
   end
 
   def correct_answers
