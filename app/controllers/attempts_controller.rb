@@ -12,7 +12,7 @@ class AttemptsController < ApplicationController
     respond_to do |format|
       if @attempt.completed?
         format.html do
-          @attempt.finalize
+          @attempt.finalize(current_user)
           redirect_to result_attempt_path(@attempt)
         end
       else

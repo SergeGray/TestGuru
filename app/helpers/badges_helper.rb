@@ -4,6 +4,6 @@ module BadgesHelper
   end
 
   def badge_progress(user, badge)
-    "#{user.user_badge(badge)&.test_count || 0}/#{badge.required_amount}"
+    "#{user.user_badge(badge)&.tests.count || 0}/#{badge.required_amount}"
   end
 end

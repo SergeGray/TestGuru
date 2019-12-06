@@ -11,6 +11,6 @@ class Badge < ApplicationRecord
 
   validates :name, presence: true
   validates :image_url, presence: true
-  validates :condition, presence: true
+  validates :condition, presence: true, uniqueness: { scope: :condition_value }
   validates :condition_value, presence: true
 end

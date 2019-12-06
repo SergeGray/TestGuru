@@ -8,14 +8,15 @@ class BadgeAwardService
   def call
     populate(@user) if @user.badges.count.zero?
 
-    @user.user_badges.each do |user_badge|
-      if accepts?(user_badge.badge, @attempt)
-        user_badge.tests.push(@attempt.test) 
+    @badges.each do |badge|
+      user_badge = @user.user_badge(badge)
+      if (
+        accepts?(user_badge.badge, @attempt) &&
+        !user_badge.tests.include?(@attempt.test)
+      )
+        update(user_badge)
       end
-
-      if eligible?(user_badge)
-        award(user_badge)
-      end
+      award(user_badge) if eligible?(user_badge)
     end
   end
 
@@ -28,7 +29,11 @@ class BadgeAwardService
   end
 
   def accepts?(badge, attempt)
-    send(badge.condition, attempt)
+    send(badge.condition, attempt, badge.condition_value)
+  end
+
+  def eligible?(user_badge)
+    user_badge.progress == 100
   end
 
   def required_amount(badge)
@@ -39,31 +44,37 @@ class BadgeAwardService
     end
   end
 
+  def update(user_badge)
+    user_badge.tests.push(@attempt.test)
+    user_badge.progress = (
+      100 * user_badge.tests.count / required_amount(user_badge.badge)
+    )
+    user_badge.save!
+  end
+
   def award(user_badge)
-    if user_badge.user_badge_tests.count == user_badge.badge.required_amount
-      user_badge.completed = true
-      user_badge.save!
-      @user.badges.push(user_badge.badge)
-    end
+    user_badge.completed = true
+    user_badge.save!
+    @user.badges.push(user_badge.badge)
   end
 
   def test_count
     user_badge_tests.count
   end
      
-  def first_try(attempt)
+  def first_try(attempt, _)
     attempt.user.attempts.where(test_id: attempt.test.id).count == 1
   end
 
-  def all_with_level(attempt)
+  def all_with_level(attempt, condition_value)
     attempt.test.level = condition_value
   end
 
-  def all_in_category(attempt)
+  def all_in_category(attempt, condition_value)
     attempt.test.category.id = condition_value
   end
 
-  def perfect_score(attempt)
+  def perfect_score(attempt, _)
     attempt.score == 100
   end
 end

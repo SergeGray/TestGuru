@@ -39,7 +39,7 @@ class Attempt < ApplicationRecord
 
   def finalize(user)
     send_completion_email
-    update_badges(user) if successful?
+    update_badges if successful?
   end
 
   private
@@ -49,7 +49,7 @@ class Attempt < ApplicationRecord
   end
 
   def update_badges
-    user.badges << BadgeAwardService.new(self).call
+    BadgeAwardService.new(self).call
   end
 
   def correct_answers
