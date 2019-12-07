@@ -2,9 +2,7 @@ class BadgeAwardService
   def initialize(user)
     @user = user
     @badges = Badge.all
-    @successful_attempts = @user.attempts.select do |attempt|
-      attempt.successful?
-    end
+    @successful_attempts = @user.attempts.select(&:successful?)
   end
 
   def call

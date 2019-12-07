@@ -5,7 +5,7 @@ class Badge < ApplicationRecord
     all_in_category: 2,
     perfect_score: 3
   }
-  
+
   has_many :user_badges, dependent: :destroy
   has_many :users, through: :user_badges
 
