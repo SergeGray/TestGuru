@@ -26,16 +26,12 @@ class User < ApplicationRecord
     attempts.order(id: :desc).find_by(test_id: test.id)
   end
 
-  def user_badge(badge)
-    user_badges.order(id: :desc).find_by(badge_id: badge.id, completed: false)
+  def badge_count(badge)
+    user_badges.where(badge_id: badge.id).count
   end
 
   def admin?
     is_a?(Admin)
-  end
-
-  def badge_count(badge)
-    user_badges.where(badge_id: badge.id, completed: true).count
   end
 
   def successful_attempts

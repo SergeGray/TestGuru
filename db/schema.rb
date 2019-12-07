@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_06_094725) do
+ActiveRecord::Schema.define(version: 2019_12_07_125857) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 2019_12_06_094725) do
     t.integer "condition_value", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["condition", "condition_value"], name: "index_badges_on_condition_and_condition_value", unique: true
   end
 
   create_table "categories", force: :cascade do |t|
@@ -83,20 +84,11 @@ ActiveRecord::Schema.define(version: 2019_12_06_094725) do
     t.index ["title", "level"], name: "index_tests_on_title_and_level", unique: true
   end
 
-  create_table "user_badge_tests", force: :cascade do |t|
-    t.integer "user_badge_id", null: false
-    t.integer "test_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "user_badges", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "badge_id", null: false
-    t.boolean "completed", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "progress", default: 0, null: false
   end
 
   create_table "users", force: :cascade do |t|

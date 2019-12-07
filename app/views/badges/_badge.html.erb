@@ -1,9 +1,8 @@
 <tr>
   <td class="align-middle"><%= badge.name %></td>
   <td class="align-middle"><%= image_tag badge.image_url %></td>
-  <td class="align-middle"><%= current_user.badge_count(badge) %></td>
   <td class="align-middle">
-    <%= "#{current_user.user_badge(badge)&.progress || 0}%" %>
+    <%= current_user.badge_count(badge) %>
   </td>
   <td class="align-middle"><%= link_to t('.show'), badge_path(badge) %></td>
 </tr>

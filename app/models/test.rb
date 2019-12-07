@@ -4,8 +4,6 @@ class Test < ApplicationRecord
   has_many :questions, dependent: :destroy
   has_many :attempts, dependent: :destroy
   has_many :users, through: :attempts
-  has_many :user_badge_tests, dependent: :destroy
-  has_many :user_badges, through: :user_badge_tests
 
   validates :title, presence: true
   validates :level, numericality: {
