@@ -1,7 +1,7 @@
 module BadgesHelper
-  def condition_select(badge)
+  def condition_select
     select(
-      badge,
+      :badge,
       :condition,
       Badge.conditions.keys.map { |c| [t(".#{c}"), c] },
       { prompt: true, class: "form-control" }
