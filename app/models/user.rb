@@ -26,6 +26,10 @@ class User < ApplicationRecord
     attempts.order(id: :desc).find_by(test_id: test.id)
   end
 
+  def user_badge(badge)
+    user_badges.order(id: :desc).find_by(badge_id: badge.id)
+  end
+
   def badge_count(badge)
     user_badges.where(badge_id: badge.id).count
   end
