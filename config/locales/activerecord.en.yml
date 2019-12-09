@@ -2,6 +2,7 @@ en:
   activerecord:
     models:
       test: "Test"
+      badge: "Badge"
 
     attributes:
       test:

@@ -10,6 +10,12 @@ ru:
         level: &level "Уровень"
         author: &author "Автор"
         category_id: &category "Категория"
+      badge:
+        name: &name "Имя"
+        image_url: "URL картинки"
+        description: &description "Описание"
+        condition: "Условие"
+        condition_value: "Значение условия"
     select:
       prompt: "Выберите:"
 
@@ -76,9 +82,14 @@ ru:
         edit: *edit
         destroy: *destroy
         confirm: *confirm
+      form:
+        first_try: "С первой попытки"
+        all_with_level: "Все Тесты с уровнем"
+        all_in_category: "Все Тесты в Категории"
+        perfect_score: "Идеальный результат"
       index:
         header: &badges-index-header "Бейджи"
-        name: &name "Имя"
+        name: *name
         icon: &icon "Иконка"
         actions: *actions
       edit:
@@ -91,7 +102,7 @@ ru:
       show:
         name: *name
         icon: *icon
-        description: &description "Описание"
+        description: *description
         back: *back
 
   tests:

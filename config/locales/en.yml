@@ -10,6 +10,13 @@ en:
         level: &level "Level"
         author: &author "Author"
         category_id: &category "Category"
+      badge:
+        name: &name "Name"
+        image_url: "Image URL"
+        description: &description "Description"
+        condition: "Condition"
+        condition_value: "Condition Value"
+
     select:
       prompt: "Please Select"
 
@@ -74,6 +81,11 @@ en:
         edit: *edit
         destroy: *destroy
         confirm: *confirm
+      form:
+        first_try: "First Try"
+        all_with_level: "All Tests with level"
+        all_in_category: "All Tests in Category"
+        perfect_score: "Perfect score"
       index:
         header: &badges-index-header "Badges"
         name: &name "Name"
@@ -89,7 +101,7 @@ en:
       show:
         name: *name
         icon: *icon
-        description: &description "Description"
+        description: *description
         back: *back
       
 

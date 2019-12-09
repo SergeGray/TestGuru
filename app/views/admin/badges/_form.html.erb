@@ -23,12 +23,7 @@
 
     <p>
       <%= form.label :condition %>
-      <%= form.collection_select :condition,
-                                  options,
-                                  :first,
-                                  :first,
-                                  prompt: true,
-                                  class: "form-control" %>
+      <%= condition_select(@badge) %>
     </p>
 
     <p>
