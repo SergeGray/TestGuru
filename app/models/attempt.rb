@@ -7,9 +7,11 @@ class Attempt < ApplicationRecord
 
   before_validation :before_validation_set_current_question
 
+  scope :passed, -> { where(passed: true) }
+
   def accept!(answer_ids)
     self.correct_questions += 1 if correct_answer?(answer_ids)
-    self.passed = true if successful?
+    self.passed = successful?
 
     save!
   end
@@ -50,7 +52,7 @@ class Attempt < ApplicationRecord
   end
 
   def update_badges(user)
-    user.badges << BadgeAwardService.new(user).call
+    user.badges << BadgeAwardService.new(self).call
   end
 
   def correct_answers

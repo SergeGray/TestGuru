@@ -19,3 +19,4 @@ ru:
       errors:
         messages:
           blank: "не может быть пустым"
+          invalid_condition: "не является верным условием"

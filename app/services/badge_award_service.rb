@@ -1,6 +1,11 @@
 class BadgeAwardService
-  def initialize(user)
-    @user = user
+  CONDITIONS = %w[
+    first_try all_with_level all_in_category perfect_score
+  ].freeze
+
+  def initialize(attempt)
+    @attempt = attempt
+    @user = @attempt.user
     @badges = Badge.all
   end
 
@@ -12,18 +17,12 @@ class BadgeAwardService
 
   private
 
-  def required_amount(badge)
-    case badge.condition
-    when "all_with_level" || "all_in_category" then 1
-    else badge.condition_value
-    end
+  def last_award(badge)
+    @user.user_badge(badge)&.created_at || Time.at(0)
   end
 
   def new_passed(badge)
-    @user.attempts.where(
-      "passed = true and updated_at > ?",
-      @user.user_badge(badge)&.created_at || Time.at(0)
-    )
+    @user.attempts.passed.where("updated_at > ?", last_award(badge))
   end
 
   def passed_tests_count(badge)
@@ -31,22 +30,30 @@ class BadgeAwardService
   end
      
   def first_try(badge)
-    new_passed(badge).select do |attempt|
-      @user.attempts.where(test_id: attempt.test.id).count == 1
-    end.count == required_amount(badge)
+    return if @user.attempts.where(test_id: @attempt.test.id).count != 1
+
+    new_passed(badge).select do |passed|
+      @user.attempts.where(test_id: passed.test.id).count == 1
+    end.count == badge.condition_value
   end
 
   def all_with_level(badge)
+    return if @attempt.test.level != badge.condition_value
+
     passed_tests_count(badge) == Test.of_level(badge.condition_value).count
   end
 
   def all_in_category(badge)
+    return if @attempt.test.category.id != badge.condition_value
+
     passed_tests_count(badge) == Test.of_category(badge.condition_value).count
   end
 
   def perfect_score(badge)
-    new_passed(badge).select do |attempt|
-      attempt.score == 100
-    end.size == required_amount(badge)
+    return if @attempt.score != 100
+
+    new_passed(badge).select do |passed|
+      passed.score == 100
+    end.size == badge.condition_value
   end
 end

@@ -128,7 +128,7 @@ Badge.create!(
                  "2017/07/option-script-configuration-api-256.png",
       description: "Complete all tests in the Scripting category",
       condition: "all_in_category",
-      condition_value: 3
+      condition_value: 1
     }, {
       name: "Perfectionist",
       image_url: "https://cdn.iconscout.com/icon/premium/png-256-thumb/"\

@@ -3,7 +3,7 @@ module BadgesHelper
     select(
       :badge,
       :condition,
-      Badge.conditions.keys.map { |c| [t(".#{c}"), c] },
+      Badge.conditions.keys.map { |condition| [t(".#{condition}"), condition] },
       { prompt: true, class: "form-control" }
     )
   end
