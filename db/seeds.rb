@@ -112,9 +112,9 @@ Badge.create!(
       name: "Ace",
       image_url: "https://cdn.iconscout.com/icon/premium/png-256-thumb/"\
                  "spade-ace-card-624103.png",
-      description: "Complete 2 tests on your first try",
+      description: "Complete Python test on your first try",
       condition: "first_try",
-      condition_value: 2
+      condition_value: 1
     }, {
       name: "Talented",
       image_url: "https://cdn.iconscout.com/icon/premium/png-256-thumb/"\
@@ -129,13 +129,6 @@ Badge.create!(
       description: "Complete all tests in the Scripting category",
       condition: "all_in_category",
       condition_value: 1
-    }, {
-      name: "Perfectionist",
-      image_url: "https://cdn.iconscout.com/icon/premium/png-256-thumb/"\
-                 "perfect-6-820963.png",
-      description: "Complete 2 tests with a perfect score",
-      condition: "perfect_score",
-      condition_value: 2
     }
   ]
 )

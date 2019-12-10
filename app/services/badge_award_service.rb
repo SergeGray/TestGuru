@@ -30,11 +30,9 @@ class BadgeAwardService
   end
      
   def first_try(badge)
-    return if @user.attempts.where(test_id: @attempt.test.id).count != 1
-
-    new_passed(badge).select do |passed|
-      @user.attempts.where(test_id: passed.test.id).count == 1
-    end.count == badge.condition_value
+    return if @attempt.test.id != badge.condition_value
+    
+    @user.attempts.where(test_id: badge.condition_value).count == 1
   end
 
   def all_with_level(badge)
@@ -47,13 +45,5 @@ class BadgeAwardService
     return if @attempt.test.category.id != badge.condition_value
 
     passed_tests_count(badge) == Test.of_category(badge.condition_value).count
-  end
-
-  def perfect_score(badge)
-    return if @attempt.score != 100
-
-    new_passed(badge).select do |passed|
-      passed.score == 100
-    end.size == badge.condition_value
   end
 end
