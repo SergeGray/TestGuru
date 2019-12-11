@@ -11,6 +11,7 @@
   <td class="align-middle">
     <%= test.author.first_name %> <%= test.author&.last_name %>
   </td>
+  <td class="align-middle"><%= timer_format(test.timer * 60) %></td>
   <td class="align-middle"><%= test.questions.count %></td>
   <td class="align-middle">
     <%= link_to t('.show'), admin_test_path(test) %>

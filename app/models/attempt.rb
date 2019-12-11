@@ -6,18 +6,19 @@ class Attempt < ApplicationRecord
   belongs_to :current_question, class_name: 'Question', optional: true
 
   before_validation :before_validation_set_current_question
+  validate :validate_timer
 
   scope :passed, -> { where(passed: true) }
 
-  def accept!(answer_ids)
+  def accept(answer_ids)
     self.correct_questions += 1 if correct_answer?(answer_ids)
     self.passed = successful?
 
-    save!
+    save
   end
 
   def completed?
-    current_question.nil?
+    current_question.nil? || time_left <= 0
   end
 
   def current_question_index
@@ -33,7 +34,7 @@ class Attempt < ApplicationRecord
   end
 
   def successful?
-    score > 85
+    score > PASSING_SCORE
   end
 
   def progress
@@ -43,6 +44,10 @@ class Attempt < ApplicationRecord
   def finalize(user)
     send_completion_email
     update_badges(user) if successful?
+  end
+
+  def time_left
+    timer - time_passed
   end
 
   private
@@ -69,6 +74,20 @@ class Attempt < ApplicationRecord
     else
       test.questions.first
     end
+  end
+
+  def timer
+    test.timer * 60
+  end
+
+  def time_passed
+    Time.zone.now - created_at
+  end
+
+  def validate_timer
+    return unless timer > 0 && persisted?
+
+    errors.add(:test, "time is up") if time_left <= 0
   end
 
   def before_validation_set_current_question

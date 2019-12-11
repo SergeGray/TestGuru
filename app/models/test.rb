@@ -10,6 +10,10 @@ class Test < ApplicationRecord
     greater_than_or_equal_to: 0,
     only_integer: true
   }, allow_nil: true
+  validates :timer, numericality: {
+    greater_than_or_equal_to: 0,
+    only_integer: true
+  }, allow_nil: true
   validates :title, uniqueness: { scope: :level }
 
   scope :of_level, ->(level) { where(level: level) }

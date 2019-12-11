@@ -1,6 +1,13 @@
 <div class="row">
   <div class="col">
     <h1><%= t('.header', title: @attempt.test.title) %></h1>
+    <%= content_tag :p,
+                    class: "test-timer hide",
+                    data: {
+                      attempt_id: @attempt.id
+                    } do %>
+      <%= timer_format(@attempt.time_left) %>
+    <% end %>
     <p>
       <%= content_tag :div, class: 'progress' do %>
         <%= content_tag :div,
