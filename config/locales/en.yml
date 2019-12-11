@@ -10,6 +10,13 @@ en:
         level: &level "Level"
         author: &author "Author"
         category_id: &category "Category"
+      badge:
+        name: &name "Name"
+        image_url: "Image URL"
+        description: &description "Description"
+        condition: "Condition"
+        condition_value: "Condition Value"
+
     select:
       prompt: "Please Select"
 
@@ -68,6 +75,35 @@ en:
         url: "Url"
         user: "User"
         back: *back
+    badges:
+      badge:
+        show: *show
+        edit: *edit
+        destroy: *destroy
+        confirm: *confirm
+      form:
+        first_try: "First Try"
+        all_with_level: "All Tests with level"
+        all_in_category: "All Tests in Category"
+        perfect_score: "Perfect score"
+      index:
+        header: &badges-index-header "Badges"
+        name: &name "Name"
+        icon: &icon "Icon"
+        actions: *actions
+      edit:
+        header: "Edit Badge"
+        show: *show
+        back: *back
+      new:
+        header: "New Badge"
+        back: *back
+      show:
+        name: *name
+        icon: *icon
+        description: *description
+        back: *back
+      
 
   tests:
     test:
@@ -95,6 +131,20 @@ en:
       success: "Successfully created Gist"
       gist_link: "Link to the Gist"
       failure: "Failed to create Gist"
+
+  badges:
+    index:
+      header: *badges-index-header
+      name: *name
+      icon: *icon
+      count: "Count"
+      progress: "Progress"
+      actions: *actions
+    show:
+        name: *name
+        icon: *icon
+        description: *description
+        back: *back
 
   feedback:
     new:

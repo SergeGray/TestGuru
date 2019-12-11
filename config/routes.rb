@@ -22,9 +22,11 @@ Rails.application.routes.draw do
         resources :answers, shallow: true, except: :index
       end
     end
-
+    
+    resources :badges
     resources :gists, only: :index
   end
 
   resources :feedback, only: %i[new create]
+  resources :badges, only: %i[index show]
 end

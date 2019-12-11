@@ -10,6 +10,12 @@ ru:
         level: &level "Уровень"
         author: &author "Автор"
         category_id: &category "Категория"
+      badge:
+        name: &name "Имя"
+        image_url: "URL картинки"
+        description: &description "Описание"
+        condition: "Условие"
+        condition_value: "Значение условия"
     select:
       prompt: "Выберите:"
 
@@ -70,6 +76,34 @@ ru:
         url: "Ссылка"
         user: "Пользователь"
         back: *back
+    badges:
+      badge:
+        show: *show
+        edit: *edit
+        destroy: *destroy
+        confirm: *confirm
+      form:
+        first_try: "С первой попытки"
+        all_with_level: "Все Тесты с уровнем"
+        all_in_category: "Все Тесты в Категории"
+        perfect_score: "Идеальный результат"
+      index:
+        header: &badges-index-header "Бейджи"
+        name: *name
+        icon: &icon "Иконка"
+        actions: *actions
+      edit:
+        header: "Редактировать Бейдж"
+        show: *show
+        back: *back
+      new:
+        header: "Новый бейдж"
+        back: *back
+      show:
+        name: *name
+        icon: *icon
+        description: *description
+        back: *back
 
   tests:
     test:
@@ -97,6 +131,20 @@ ru:
       success: "Gist создан"
       failure: "Не удалось создать Gist"
       gist_link: "Ссылка на Gist"
+
+  badges:
+    index:
+      header: *badges-index-header
+      name: *name
+      icon: *icon
+      count: "Количество"
+      progress: "Прогресс"
+      actions: *actions
+    show:
+        name: *name
+        icon: *icon
+        description: *description
+        back: *back
 
   feedback:
     new:

@@ -1,0 +1,11 @@
+<div class="row justify-content-center mt-3">
+  <div class="col col-md-4">
+    <h1><%= t('.header') %></h1>
+
+    <%= render 'form' %>
+    <div class="mt-1">
+      <%= link_to t('.show'), admin_badge_path(@badge) %> |
+      <%= link_to t('.back'), admin_badges_path %>
+    </div>
+  </div>
+</div>

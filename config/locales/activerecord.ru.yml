@@ -2,6 +2,7 @@ ru:
   activerecord:
     models:
       test: "Тест"
+      badge: "Бейдж"
 
     attributes:
       test:
@@ -18,3 +19,4 @@ ru:
       errors:
         messages:
           blank: "не может быть пустым"
+          invalid_condition: "не является верным условием"

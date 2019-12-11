@@ -7,8 +7,11 @@ class Attempt < ApplicationRecord
 
   before_validation :before_validation_set_current_question
 
+  scope :passed, -> { where(passed: true) }
+
   def accept!(answer_ids)
     self.correct_questions += 1 if correct_answer?(answer_ids)
+    self.passed = successful?
 
     save!
   end
@@ -37,7 +40,20 @@ class Attempt < ApplicationRecord
     100 * (current_question_index + 1) / total_questions
   end
 
+  def finalize(user)
+    send_completion_email
+    update_badges(user) if successful?
+  end
+
   private
+
+  def send_completion_email
+    TestsMailer.completed_test(self).deliver_now
+  end
+
+  def update_badges(user)
+    user.badges << BadgeAwardService.new(self).call
+  end
 
   def correct_answers
     current_question.answers.correct

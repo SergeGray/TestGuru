@@ -17,9 +17,9 @@ class Test < ApplicationRecord
   scope :medium, -> { of_level(2..4) }
   scope :hard, -> { of_level(5..Float::INFINITY) }
   scope :of_category, (
-    lambda do |category_title|
+    lambda do |category_id|
       joins(:category)
-        .where(categories: { title: category_title })
+        .where(categories: { id: category_id })
         .order(id: :desc)
     end
   )

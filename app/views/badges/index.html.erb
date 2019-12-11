@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col">
+    <h1><%= t('.header') %></h1>
+
+    <table class="table">
+      <th><%= t('.name') %></th>
+      <th><%= t('.icon') %></th>
+      <th><%= t('.count') %></th>
+      <th><%= t('.actions') %></th>
+
+    <%= render @badges %>
+    </table>
+  </div>
+</div>
