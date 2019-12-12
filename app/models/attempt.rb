@@ -12,6 +12,7 @@ class Attempt < ApplicationRecord
   def accept!(answer_ids)
     self.correct_questions += 1 if correct_answer?(answer_ids)
     self.passed = successful?
+    end_test if time_out?
 
     save!
   end
@@ -33,7 +34,7 @@ class Attempt < ApplicationRecord
   end
 
   def successful?
-    score > 85
+    score > PASSING_SCORE
   end
 
   def progress
@@ -43,6 +44,10 @@ class Attempt < ApplicationRecord
   def finalize(user)
     send_completion_email
     update_badges(user) if successful?
+  end
+
+  def time_left
+    timer - time_passed
   end
 
   private
@@ -69,6 +74,22 @@ class Attempt < ApplicationRecord
     else
       test.questions.first
     end
+  end
+
+  def timer
+    test.timer * 60
+  end
+
+  def time_passed
+    Time.zone.now - created_at
+  end
+
+  def time_out?
+    time_left <= 0
+  end
+
+  def end_test
+    self.current_question = test.questions.last
   end
 
   def before_validation_set_current_question

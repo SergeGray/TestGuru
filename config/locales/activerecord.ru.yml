@@ -8,6 +8,7 @@ ru:
       test:
         title: "Название"
         level: "Уровень"
+        timer: "Таймер"
         category: "Категория"
       user:
         first_name: "Имя"

@@ -8,6 +8,7 @@ en:
       test:
         title: "Title"
         level: "Level"
+        timer: "Timer"
         category: "Category"
       user:
         first_name: "First Name"
