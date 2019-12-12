@@ -7,7 +7,7 @@ class AttemptsController < ApplicationController
   def result; end
 
   def update
-    @attempt.accept(params[:answer_ids])
+    @attempt.accept!(params[:answer_ids])
 
     respond_to do |format|
       if @attempt.completed?

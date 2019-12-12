@@ -37,7 +37,7 @@ function startTimer(timer) {
 
     if (deadline - Date.now() < 0) {
       clearInterval(x);
-      window.location = timer.dataset.attemptId + '/result';
+      document.getElementById('attempt_form').submit();
     }
   }, 1000);
 }

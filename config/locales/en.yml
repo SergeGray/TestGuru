@@ -9,6 +9,7 @@ en:
         title: &title "Title"
         level: &level "Level"
         author: &author "Author"
+        timer: &timer "Timer"
         category_id: &category "Category"
       badge:
         name: &name "Name"
@@ -39,6 +40,7 @@ en:
         title: *title
         level: *level
         author: *author
+        timer: *timer
         category: *category
         questions: &questions "Questions"
         actions: &actions "Actions"
@@ -57,6 +59,7 @@ en:
         title: *title
         level: *level
         author: *author
+        timer: *timer
         category: *category
         questions: *questions
         back: *back
@@ -113,6 +116,7 @@ en:
       title: *title
       level: *level
       author: *author
+      timer: *timer
       category: *category
       questions: *questions
       actions: *actions

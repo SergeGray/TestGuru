@@ -6,19 +6,19 @@ class Attempt < ApplicationRecord
   belongs_to :current_question, class_name: 'Question', optional: true
 
   before_validation :before_validation_set_current_question
-  validate :validate_timer
 
   scope :passed, -> { where(passed: true) }
 
-  def accept(answer_ids)
+  def accept!(answer_ids)
     self.correct_questions += 1 if correct_answer?(answer_ids)
     self.passed = successful?
+    end_test if time_out?
 
-    save
+    save!
   end
 
   def completed?
-    current_question.nil? || time_left <= 0
+    current_question.nil?
   end
 
   def current_question_index
@@ -84,10 +84,12 @@ class Attempt < ApplicationRecord
     Time.zone.now - created_at
   end
 
-  def validate_timer
-    return unless timer > 0 && persisted?
+  def time_out?
+    time_left <= 0
+  end
 
-    errors.add(:test, "time is up") if time_left <= 0
+  def end_test
+    self.current_question = test.questions.last
   end
 
   def before_validation_set_current_question

@@ -9,6 +9,7 @@ ru:
         title: &title "Название"
         level: &level "Уровень"
         author: &author "Автор"
+        timer: &timer "Таймер"
         category_id: &category "Категория"
       badge:
         name: &name "Имя"
@@ -40,6 +41,7 @@ ru:
         title: *title
         level: *level
         author: *author
+        timer: *timer
         category: *category
         questions: &questions "Вопросы"
         actions: &actions "Действия"
@@ -58,6 +60,7 @@ ru:
         title: *title
         level: *level
         author: *author
+        timer: *timer
         category: *category
         questions: *questions
         back: *back
@@ -113,6 +116,7 @@ ru:
       title: *title
       level: *level
       author: *author
+      timer: *timer
       category: *category
       questions: *questions
       actions: *actions
